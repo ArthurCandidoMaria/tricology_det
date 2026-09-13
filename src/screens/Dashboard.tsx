@@ -12,10 +12,10 @@ interface Props {
   patient: Patient;
   onBack: () => void;
   onNewSession: () => void;
-  onAnalyzeByArea: () => void;
+  onAnalyzeBySession: () => void;
 }
 
-export function Dashboard({ patient, onBack, onNewSession, onAnalyzeByArea }: Props) {
+export function Dashboard({ patient, onBack, onNewSession, onAnalyzeBySession }: Props) {
   const [sessions, setSessions] = useState<SessionWithPhotos[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -127,8 +127,8 @@ export function Dashboard({ patient, onBack, onNewSession, onAnalyzeByArea }: Pr
         <button onClick={onNewSession} className="btn-primary flex-1">
           <Plus size={18} /> Nova sessão
         </button>
-        <button onClick={onAnalyzeByArea} className="btn-secondary flex-1">
-          <BarChart3 size={18} /> Analisar por área
+        <button onClick={onAnalyzeBySession} className="btn-secondary flex-1">
+          <BarChart3 size={18} /> Analisar por sessão
         </button>
       </div>
     </div>

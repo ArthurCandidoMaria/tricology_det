@@ -8,6 +8,7 @@ import type { ScalpArea } from '@/lib/types';
 
 interface Props {
   patient: Patient;
+  sessionId: string;
   onBack: () => void;
 }
 
@@ -30,10 +31,11 @@ interface AreaData {
   photoCount: number;
 }
 
-export function AnalyzeByArea({ patient, onBack }: Props) {
+export function AnalyzeByArea({ patient, sessionId, onBack }: Props) {
   const [sessions, setSessions] = useState<SessionWithPhotos[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedPhoto, setSelectedPhoto] = useState<{ url: string; label: string } | null>(null);
+  const [galleryArea, setGalleryArea] = useState<AreaData | null>(null);
+  const [selectedPhoto, setSelectedPhoto] = useState<ReviewPhoto | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -41,12 +43,13 @@ export function AnalyzeByArea({ patient, onBack }: Props) {
         .from('sessions')
         .select('*, session_photos(*)')
         .eq('patient_id', patient.id)
+        .eq('id', sessionId)
         .order('session_date', { ascending: true });
 
       setLoading(false);
       if (!error && data) setSessions(data as SessionWithPhotos[]);
     })();
-  }, [patient.id]);
+  }, [patient.id, sessionId]);
 
   const areaData: AreaData[] = (() => {
     const valuesMap = new Map<ScalpArea, { date: string; label: string; value: number }[]>();
@@ -115,7 +118,7 @@ export function AnalyzeByArea({ patient, onBack }: Props) {
           </div>
           <h1 className="font-display text-2xl font-bold text-ink-900">Analisar por área</h1>
         </div>
-        <p className="text-sm text-ink-500">Contagem de fios/folículos por área ao longo do tempo para {patient.name}.</p>
+        <p className="text-sm text-ink-500">Contagem de fios/folículos por área nesta sessão de {patient.name}.</p>
       </div>
 
       {loading ? (
@@ -130,26 +133,61 @@ export function AnalyzeByArea({ patient, onBack }: Props) {
       ) : (
         <div className="grid sm:grid-cols-2 gap-4">
           {areaData.map((d) => (
-            <AreaCard key={d.area} data={d} onPreview={setSelectedPhoto} />
+            <AreaCard key={d.area} data={d} onOpenGallery={setGalleryArea} />
           ))}
         </div>
       )}
 
-      {selectedPhoto && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" onClick={() => setSelectedPhoto(null)}>
+      {galleryArea && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" onClick={() => setGalleryArea(null)}>
           <div className="relative max-w-5xl w-full max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              onClick={() => setGalleryArea(null)}
+              className="absolute right-3 top-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70"
+              aria-label="Fechar galeria"
+            >
+              <X size={18} />
+            </button>
+            <div className="border-b border-ink-100 px-5 py-4">
+              <h2 className="font-display text-lg font-bold text-ink-900">Imagens da área {galleryArea.label}</h2>
+              <p className="text-sm text-ink-500">{galleryArea.photos.length} imagens desta sessão</p>
+            </div>
+            <div className="grid max-h-[75vh] grid-cols-2 gap-3 overflow-y-auto p-5 sm:grid-cols-3 lg:grid-cols-4">
+              {[...galleryArea.photos].reverse().map((photo, index) => (
+                <button
+                  key={`${photo.date}-${index}`}
+                  type="button"
+                  onClick={() => setSelectedPhoto(photo)}
+                  className="overflow-hidden rounded-xl border border-ink-100 bg-ink-50 text-left hover:border-brand-300 transition-colors"
+                >
+                  <img src={photo.url} alt={`${galleryArea.label} — ${photo.label}`} className="aspect-square w-full object-cover" />
+                  <div className="px-2.5 py-2">
+                    <p className="text-xs font-semibold text-ink-700">{photo.label}</p>
+                    {photo.value != null && <p className="text-xs text-ink-400 mt-0.5">{formatNumber(photo.value)} fios</p>}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selectedPhoto && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 p-4" onClick={() => setSelectedPhoto(null)}>
+          <div className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-2xl bg-white shadow-2xl" onClick={(event) => event.stopPropagation()}>
             <button
               type="button"
               onClick={() => setSelectedPhoto(null)}
               className="absolute right-3 top-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70"
-              aria-label="Fechar visualização"
+              aria-label="Fechar imagem ampliada"
             >
               <X size={18} />
             </button>
-            <img src={selectedPhoto.url} alt={selectedPhoto.label} className="max-h-[85vh] w-full object-contain bg-ink-950" />
-            <div className="px-4 py-3 border-t border-ink-100 bg-white">
-              <p className="text-sm font-semibold text-ink-700">Foto revisada</p>
-              <p className="text-xs text-ink-400">{selectedPhoto.label}</p>
+            <img src={selectedPhoto.url} alt={`${selectedPhoto.label} ampliada`} className="max-h-[78vh] w-full object-contain bg-ink-950" />
+            <div className="border-t border-ink-100 px-5 py-3">
+              <p className="text-sm font-semibold text-ink-700">{selectedPhoto.label}</p>
+              <p className="text-sm text-ink-500 mt-1">{selectedPhoto.value != null ? `${formatNumber(selectedPhoto.value)} fios/folículos` : 'Contagem não disponível'}</p>
             </div>
           </div>
         </div>
@@ -158,7 +196,7 @@ export function AnalyzeByArea({ patient, onBack }: Props) {
   );
 }
 
-function AreaCard({ data, onPreview }: { data: AreaData; onPreview: (photo: { url: string; label: string }) => void }) {
+function AreaCard({ data, onOpenGallery }: { data: AreaData; onOpenGallery: (area: AreaData) => void }) {
   const { delta, deltaPct, latest, values } = data;
   const trendIcon = delta == null ? <Minus size={16} /> : delta >= 0 ? <TrendingUp size={16} /> : <TrendingDown size={16} />;
   const trendColor = delta == null ? 'text-ink-400' : delta >= 0 ? 'text-brand-600' : 'text-red-500';
@@ -243,11 +281,11 @@ function AreaCard({ data, onPreview }: { data: AreaData; onPreview: (photo: { ur
               </span>
             </div>
             <div className="grid grid-cols-3 gap-2">
-              {data.photos.map((photo, idx) => (
+              {data.photos.slice(-3).reverse().map((photo, idx) => (
                 <button
                   type="button"
                   key={`${photo.date}-${idx}`}
-                  onClick={() => onPreview({ url: photo.url, label: `${data.label} — ${photo.label}${photo.value != null ? ` (${formatNumber(photo.value)})` : ''}` })}
+                  onClick={() => onOpenGallery(data)}
                   className="group relative overflow-hidden rounded-xl border border-ink-200 bg-ink-50 hover:border-brand-300 transition-colors"
                 >
                   <img src={photo.url} alt={`${data.label} — ${photo.label}`} className="h-20 w-full object-cover" />

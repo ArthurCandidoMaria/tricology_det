@@ -10,11 +10,12 @@ import { formatDate } from '@/lib/formatters';
 
 interface Props {
   patient: Patient;
+  sessionId?: string;
   onBack: () => void;
   onSaved: () => void;
 }
 
-export function NewSession({ patient, onBack, onSaved }: Props) {
+export function NewSession({ patient, sessionId, onBack, onSaved }: Props) {
   const [photos, setPhotos] = useState<PendingPhoto[]>([]);
   const [sessionDate, setSessionDate] = useState(() => new Date().toISOString().slice(0, 10));
   const [notes, setNotes] = useState('');
@@ -56,14 +57,15 @@ export function NewSession({ patient, onBack, onSaved }: Props) {
     setPhotos((prev) => prev.map((p) => (p.id === id ? { ...p, scalpArea: area } : p)));
   }
 
-  async function analyzeAll() {
+  async function analyzeAll(): Promise<PendingPhoto[] | null> {
     setError(null);
+    let analyzedPhotos = photos;
     for (const p of photos) {
       if (p.status === 'done') continue;
       setPhotos((prev) => prev.map((x) => (x.id === p.id ? { ...x, status: 'processing' } : x)));
       try {
         const result = await analyzeImageWithAnnotations(p.file);
-        setPhotos((prev) => prev.map((x) => (x.id === p.id
+        analyzedPhotos = analyzedPhotos.map((x) => (x.id === p.id
           ? {
               ...x,
               hairCount: Number(result.count ?? 0),
@@ -71,30 +73,33 @@ export function NewSession({ patient, onBack, onSaved }: Props) {
               annotatedPhotoUrl: result.annotated_photo_url || x.annotatedPhotoUrl || null,
               status: 'done',
             }
-          : x)));
+          : x));
+        setPhotos(analyzedPhotos);
       } catch (err) {
         const message = err instanceof Error ? err.message : 'Não foi possível analisar esta imagem.';
         setError(message);
         setPhotos((prev) => prev.map((x) => (x.id === p.id ? { ...x, status: 'pending' } : x)));
+        return null;
       }
     }
+    return analyzedPhotos;
   }
 
-  async function handleSave() {
+  async function saveSession(photosToSave: PendingPhoto[]) {
     setError(null);
 
-    if (photos.length === 0) {
+    if (photosToSave.length === 0) {
       setError('Envie pelo menos uma foto.');
       return;
     }
 
-    const unassigned = photos.some((p) => !p.scalpArea);
+    const unassigned = photosToSave.some((p) => !p.scalpArea);
     if (unassigned) {
       setError('Atribua uma área do couro cabeludo a cada foto antes de salvar.');
       return;
     }
 
-    const unanalyzed = photos.some((p) => p.status !== 'done' || p.hairCount == null);
+    const unanalyzed = photosToSave.some((p) => p.status !== 'done' || p.hairCount == null);
     if (unanalyzed) {
       setError('Analise todas as fotos antes de salvar.');
       return;
@@ -103,27 +108,36 @@ export function NewSession({ patient, onBack, onSaved }: Props) {
     setSaving(true);
 
     const totalHairs = Math.round(
-      photos.reduce((sum, p) => sum + (p.hairCount ?? 0), 0) / photos.length,
+      photosToSave.reduce((sum, p) => sum + (p.hairCount ?? 0), 0) / photosToSave.length,
     );
 
-    const { data: sessionData, error: sessionError } = await supabase
-      .from('sessions')
-      .insert({
-        patient_id: patient.id,
-        session_date: sessionDate,
-        total_hairs: totalHairs,
-        notes: notes || null,
-      })
-      .select()
-      .maybeSingle();
+    let sessionData: { id: string } | null = null;
+    let sessionError: { message: string } | null = null;
+
+    if (sessionId) {
+      sessionData = { id: sessionId };
+    } else {
+      const result = await supabase
+        .from('sessions')
+        .insert({
+          patient_id: patient.id,
+          session_date: sessionDate,
+          total_hairs: totalHairs,
+          notes: notes || null,
+        })
+        .select()
+        .maybeSingle();
+      sessionData = result.data as { id: string } | null;
+      sessionError = result.error;
+    }
 
     if (sessionError || !sessionData) {
       setSaving(false);
-      setError(sessionError?.message || 'Não foi possível criar a sessão.');
+      setError((sessionError as { message?: string } | null)?.message || 'Não foi possível criar a sessão.');
       return;
     }
 
-    for (const p of photos) {
+    for (const p of photosToSave) {
       let annotatedPhotoUrl: string | null = p.annotatedPhotoUrl ?? null;
 
       if (!annotatedPhotoUrl && p.annotatedPreviewUrl?.startsWith('data:image/')) {
@@ -168,7 +182,8 @@ export function NewSession({ patient, onBack, onSaved }: Props) {
       const { error: photoInsertError } = await supabase.from('session_photos').insert(photoRecord);
 
       if (photoInsertError) {
-        const isMissingColumn = /annotated_photo_url|column .* does not exist/i.test(photoInsertError.message || '');
+        const photoErrorMessage = (photoInsertError as { message?: string } | null)?.message || '';
+        const isMissingColumn = /annotated_photo_url|column .* does not exist/i.test(photoErrorMessage);
 
         if (isMissingColumn && annotatedPhotoUrl) {
           const { error: fallbackError } = await supabase.from('session_photos').insert({
@@ -179,20 +194,58 @@ export function NewSession({ patient, onBack, onSaved }: Props) {
           });
 
           if (fallbackError) {
-            setError(`Falha ao salvar a foto anotada na sessão: ${fallbackError.message}`);
+            setError(`Falha ao salvar a foto anotada na sessão: ${(fallbackError as { message?: string } | null)?.message || 'erro desconhecido'}`);
             setSaving(false);
             return;
           }
         } else {
-          setError(`Falha ao salvar a foto anotada na sessão: ${photoInsertError.message}`);
+          setError(`Falha ao salvar a foto anotada na sessão: ${photoErrorMessage}`);
           setSaving(false);
           return;
         }
       }
     }
 
+    if (sessionId) {
+      const { data: savedPhotosResult } = await supabase
+        .from('session_photos')
+        .select('hair_count')
+        .eq('session_id', sessionId);
+      const savedPhotos = savedPhotosResult as Array<{ hair_count: number | null }> | null;
+      const counts = (savedPhotos ?? [])
+        .map((photo) => photo.hair_count)
+        .filter((count): count is number => count != null);
+      await supabase
+        .from('sessions')
+        .update({ total_hairs: counts.length > 0 ? Math.round(counts.reduce((sum, count) => sum + count, 0) / counts.length) : null })
+        .eq('id', sessionId);
+    }
+
     setSaving(false);
     onSaved();
+  }
+
+  async function handleSave() {
+    setError(null);
+
+    if (photos.length === 0) {
+      setError('Envie pelo menos uma foto.');
+      return;
+    }
+
+    if (photos.some((p) => !p.scalpArea)) {
+      setError('Atribua uma área do couro cabeludo a cada foto antes de salvar.');
+      return;
+    }
+
+    setSaving(true);
+    const photosToSave = allAnalyzed ? photos : await analyzeAll();
+    if (!photosToSave) {
+      setSaving(false);
+      return;
+    }
+
+    await saveSession(photosToSave);
   }
 
   const allAnalyzed = photos.length > 0 && photos.every((p) => p.status === 'done');
@@ -206,8 +259,8 @@ export function NewSession({ patient, onBack, onSaved }: Props) {
 
       <div className="mb-6">
         <h1 className="font-display text-2xl font-bold text-ink-900">Nova sessão</h1>
-        <p className="text-sm text-ink-500 mt-1">
-          Envie fotos do couro cabeludo, atribua cada uma a uma área e analise para registrar o progresso de {patient.name}.
+          <p className="text-sm text-ink-500 mt-1">
+          {sessionId ? 'Adicione novas imagens analisadas a esta sessão.' : `Envie fotos do couro cabeludo, atribua cada uma a uma área e analise para registrar o progresso de ${patient.name}.`}
         </p>
       </div>
 
@@ -344,20 +397,12 @@ export function NewSession({ patient, onBack, onSaved }: Props) {
 
       <div className="flex flex-col sm:flex-row gap-3">
         <button
-          onClick={analyzeAll}
-          className="btn-secondary flex-1"
-          disabled={photos.length === 0 || saving || allAnalyzed}
-        >
-          {allAnalyzed ? <Check size={18} /> : <Loader2 size={18} className={photos.some((p) => p.status === 'processing') ? 'animate-spin' : ''} />}
-          {allAnalyzed ? 'Todas as fotos analisadas' : 'Analisar fotos'}
-        </button>
-        <button
           onClick={handleSave}
           className="btn-primary flex-1"
-          disabled={saving || !allAnalyzed || !allAssigned}
+          disabled={saving || !allAssigned || photos.some((p) => p.status === 'processing')}
         >
           {saving ? <Loader2 size={18} className="animate-spin" /> : <Check size={18} />}
-          {saving ? 'Salvando sessão...' : 'Salvar sessão'}
+          {saving ? 'Analisando e salvando...' : 'Analisar e salvar sessão'}
         </button>
       </div>
 

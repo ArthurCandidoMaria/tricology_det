@@ -368,7 +368,16 @@ async def create_patient_endpoint(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 @app.get("/api/sessions")
-def get_sessions(patient_id: str | None = None) -> list[dict[str, Any]]:
+def get_sessions(patient_id: str | None = None, id: str | None = None) -> list[dict[str, Any]]:
+    if id:
+        with get_db_connection() as conn:
+            rows = conn.execute("SELECT * FROM sessions WHERE id = ?", (id,)).fetchall()
+        result: list[dict[str, Any]] = []
+        for row in rows:
+            session = dict(row)
+            session["session_photos"] = list_session_photos(session["id"])
+            result.append(session)
+        return result
     if patient_id:
         return list_sessions_for_patient(patient_id)
     with get_db_connection() as conn:
@@ -386,9 +395,39 @@ async def create_session_endpoint(payload: dict[str, Any]) -> dict[str, Any]:
     return create_session(payload)
 
 
+@app.patch("/api/sessions")
+async def update_session_endpoint(payload: dict[str, Any]) -> dict[str, Any]:
+    session_id = payload.get("id")
+    if not session_id:
+        raise HTTPException(status_code=400, detail="A sessão precisa de um id.")
+
+    updates = {key: payload[key] for key in ("session_date", "total_hairs", "notes") if key in payload}
+    if not updates:
+        raise HTTPException(status_code=400, detail="Nenhum campo para atualizar.")
+
+    assignments = ", ".join(f"{key} = ?" for key in updates)
+    with get_db_connection() as conn:
+        cursor = conn.execute(
+            f"UPDATE sessions SET {assignments} WHERE id = ?",
+            (*updates.values(), session_id),
+        )
+        if cursor.rowcount == 0:
+            raise HTTPException(status_code=404, detail="Sessão não encontrada.")
+        row = conn.execute("SELECT * FROM sessions WHERE id = ?", (session_id,)).fetchone()
+
+    session = dict(row)
+    session["session_photos"] = list_session_photos(session_id)
+    return session
+
+
 @app.post("/api/session_photos")
 async def create_session_photo_endpoint(payload: dict[str, Any]) -> dict[str, Any]:
     return create_session_photo(payload)
+
+
+@app.get("/api/session_photos")
+def get_session_photos(session_id: str) -> list[dict[str, Any]]:
+    return list_session_photos(session_id)
 
 
 @app.post("/api/storage/upload")

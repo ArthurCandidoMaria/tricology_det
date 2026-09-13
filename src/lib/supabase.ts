@@ -18,7 +18,7 @@ function toStorageUrl(bucket: string, objectName: string) {
 
 class QueryBuilder {
   private table: string;
-  private method: 'get' | 'post' = 'get';
+  private method: 'get' | 'post' | 'patch' = 'get';
   private payload: Record<string, unknown> | null = null;
   private filters: Record<string, string | number | boolean | null> = {};
   private orderBy: { field: string; ascending: boolean } | null = null;
@@ -28,7 +28,8 @@ class QueryBuilder {
     this.table = table;
   }
 
-  select() {
+  select(columns?: string) {
+    void columns;
     return this;
   }
 
@@ -48,17 +49,23 @@ class QueryBuilder {
     return this;
   }
 
+  update(payload: Record<string, unknown>) {
+    this.method = 'patch';
+    this.payload = payload;
+    return this;
+  }
+
   maybeSingle() {
     this.isSingle = true;
     return this;
   }
 
   private async execute() {
-    if (this.method === 'post') {
+    if (this.method === 'post' || this.method === 'patch') {
       const response = await fetch(`${API_BASE}/api/${this.table}`, {
-        method: 'POST',
+        method: this.method === 'post' ? 'POST' : 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(this.payload ?? {}),
+        body: JSON.stringify({ ...(this.payload ?? {}), ...this.filters }),
       });
 
       const body = await response.json().catch(() => null);
@@ -103,7 +110,8 @@ class QueryBuilder {
 const storage = {
   from(bucket: string) {
     return {
-      async upload(objectName: string, file: Blob | File, _options?: Record<string, unknown>) {
+      async upload(objectName: string, file: Blob | File, options?: Record<string, unknown>) {
+        void options;
         const formData = new FormData();
         formData.append('bucket', bucket);
         formData.append('file', file, objectName);

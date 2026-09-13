@@ -6,21 +6,27 @@ import { SelectPatient } from '@/screens/SelectPatient';
 import { Dashboard } from '@/screens/Dashboard';
 import { NewSession } from '@/screens/NewSession';
 import { AnalyzeByArea } from '@/screens/AnalyzeByArea';
+import { SessionDashboard } from '@/screens/SessionDashboard';
+import { AnalyzeBySession } from '@/screens/AnalyzeBySession';
 import type { Patient } from '@/lib/types';
+import type { SessionWithPhotos } from '@/lib/types';
 
-type View = 'home' | 'register' | 'select' | 'dashboard' | 'new-session' | 'analyze';
+type View = 'home' | 'register' | 'select' | 'dashboard' | 'analyze-session' | 'session-dashboard' | 'new-session' | 'analyze';
 
 function App() {
   const [view, setView] = useState<View>('home');
   const [patient, setPatient] = useState<Patient | null>(null);
+  const [selectedSession, setSelectedSession] = useState<SessionWithPhotos | null>(null);
 
   function goHome() {
     setView('home');
     setPatient(null);
+    setSelectedSession(null);
   }
 
   function openDashboard(p: Patient) {
     setPatient(p);
+    setSelectedSession(null);
     setView('dashboard');
   }
 
@@ -44,7 +50,31 @@ function App() {
         <Dashboard
           patient={patient}
           onBack={goHome}
-          onNewSession={() => setView('new-session')}
+          onNewSession={() => {
+            setSelectedSession(null);
+            setView('new-session');
+          }}
+          onAnalyzeBySession={() => setView('analyze-session')}
+        />
+      )}
+
+      {view === 'analyze-session' && patient && (
+        <AnalyzeBySession
+          patient={patient}
+          onBack={() => setView('dashboard')}
+          onSelectSession={(session) => {
+            setSelectedSession(session);
+            setView('session-dashboard');
+          }}
+        />
+      )}
+
+      {view === 'session-dashboard' && patient && selectedSession && (
+        <SessionDashboard
+          patient={patient}
+          session={selectedSession}
+          onBack={() => setView('dashboard')}
+          onUpdate={() => setView('new-session')}
           onAnalyzeByArea={() => setView('analyze')}
         />
       )}
@@ -52,13 +82,17 @@ function App() {
       {view === 'new-session' && patient && (
         <NewSession
           patient={patient}
-          onBack={() => setView('dashboard')}
-          onSaved={() => setView('dashboard')}
+          sessionId={view === 'new-session' && selectedSession ? selectedSession.id : undefined}
+          onBack={() => setView(selectedSession ? 'session-dashboard' : 'dashboard')}
+          onSaved={() => {
+            setSelectedSession(null);
+            setView('dashboard');
+          }}
         />
       )}
 
-      {view === 'analyze' && patient && (
-        <AnalyzeByArea patient={patient} onBack={() => setView('dashboard')} />
+      {view === 'analyze' && patient && selectedSession && (
+        <AnalyzeByArea patient={patient} sessionId={selectedSession.id} onBack={() => setView('session-dashboard')} />
       )}
     </div>
   );

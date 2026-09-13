@@ -65,7 +65,7 @@ export function RegisterPatient({ onBack, onCreated }: Props) {
     setSaving(false);
 
     if (dbError || !data) {
-      setError(dbError?.message || 'Falha ao cadastrar paciente. Tente novamente.');
+      setError((dbError as { message?: string } | null)?.message || 'Falha ao cadastrar paciente. Tente novamente.');
       return;
     }
 
