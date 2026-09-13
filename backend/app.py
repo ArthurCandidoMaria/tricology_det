@@ -17,8 +17,8 @@ from ultralytics import YOLO
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent
-DB_PATH = BASE_DIR / "hair_analysis.db"
-STORAGE_DIR = BASE_DIR / "storage"
+DB_PATH = Path(os.getenv("DB_PATH", str(BASE_DIR / "hair_analysis.db")))
+STORAGE_DIR = Path(os.getenv("STORAGE_DIR", str(BASE_DIR / "storage")))
 STORAGE_DIR.mkdir(parents=True, exist_ok=True)
 
 app = FastAPI(title="Hair Analysis API", version="1.0.0")
