@@ -1,4 +1,4 @@
-const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '');
+const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
 
 function buildQueryString(params: Record<string, string | number | boolean | undefined | null>) {
   const search = new URLSearchParams();
