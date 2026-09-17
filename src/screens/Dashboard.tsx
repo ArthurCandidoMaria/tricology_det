@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   ArrowLeft, Plus, BarChart3, Calendar, TrendingUp, TrendingDown, Minus,
-  User, Phone, Mail, FileText, Loader2, Camera,
+  User, Phone, Mail, FileText, Loader2, Camera, Layers,
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import type { Patient, SessionWithPhotos } from '@/lib/types';
@@ -13,9 +13,10 @@ interface Props {
   onBack: () => void;
   onNewSession: () => void;
   onAnalyzeBySession: () => void;
+  onAnalyzeByArea: () => void;
 }
 
-export function Dashboard({ patient, onBack, onNewSession, onAnalyzeBySession }: Props) {
+export function Dashboard({ patient, onBack, onNewSession, onAnalyzeBySession, onAnalyzeByArea }: Props) {
   const [sessions, setSessions] = useState<SessionWithPhotos[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -126,6 +127,9 @@ export function Dashboard({ patient, onBack, onNewSession, onAnalyzeBySession }:
       <div className="flex flex-col sm:flex-row gap-3">
         <button onClick={onNewSession} className="btn-primary flex-1">
           <Plus size={18} /> Nova sessão
+        </button>
+        <button onClick={onAnalyzeByArea} className="btn-secondary flex-1">
+          <Layers size={18} /> Analisar por área
         </button>
         <button onClick={onAnalyzeBySession} className="btn-secondary flex-1">
           <BarChart3 size={18} /> Analisar por sessão

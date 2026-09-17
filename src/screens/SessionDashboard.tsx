@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, BarChart3, Calendar, Camera, RefreshCw, X } from 'lucide-react';
+import { ArrowLeft, Calendar, Camera, RefreshCw, X } from 'lucide-react';
 import type { Patient, SessionWithPhotos } from '@/lib/types';
 import { formatDateLong, formatNumber } from '@/lib/formatters';
 
@@ -8,10 +8,9 @@ interface Props {
   session: SessionWithPhotos;
   onBack: () => void;
   onUpdate: () => void;
-  onAnalyzeByArea: () => void;
 }
 
-export function SessionDashboard({ patient, session, onBack, onUpdate, onAnalyzeByArea }: Props) {
+export function SessionDashboard({ patient, session, onBack, onUpdate }: Props) {
   const allPhotos = Array.from(new Map(session.session_photos.map((photo) => [photo.id, photo])).values()).reverse();
   const photos = allPhotos.slice(0, 4);
   const [galleryOpen, setGalleryOpen] = useState(false);
@@ -128,9 +127,6 @@ export function SessionDashboard({ patient, session, onBack, onUpdate, onAnalyze
       <div className="flex flex-col sm:flex-row gap-3">
         <button onClick={onUpdate} className="btn-primary flex-1">
           <RefreshCw size={18} /> Atualizar registro da sessão
-        </button>
-        <button onClick={onAnalyzeByArea} className="btn-secondary flex-1">
-          <BarChart3 size={18} /> Analisar por área
         </button>
       </div>
     </div>
