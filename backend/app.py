@@ -309,7 +309,10 @@ def normalize_storage_url(url: str | None) -> str | None:
 
 
 def build_public_url(bucket: str, object_name: str) -> str:
-    base_url = os.getenv("API_BASE_URL", "http://localhost:8000").rstrip("/")
+    # Por padrao emite URL relativa (/storage/...). Tanto o Vite no dev quanto o
+    # nginx em producao fazem proxy de /storage, entao a imagem funciona em
+    # qualquer host e porta. Um host absoluto so e usado se API_BASE_URL existir.
+    base_url = os.getenv("API_BASE_URL", "").rstrip("/")
     normalized = object_name.replace("\\", "/").lstrip("/")
     encoded_parts = "/".join(part for part in normalized.split("/") if part)
 

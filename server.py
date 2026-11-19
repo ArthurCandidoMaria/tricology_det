@@ -31,8 +31,8 @@ def start_process(command: list[str], cwd: Path, label: str) -> subprocess.Popen
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Inicia o frontend Vite e o backend FastAPI juntos.")
-    parser.add_argument("--frontend-port", type=int, default=5173)
-    parser.add_argument("--backend-port", type=int, default=8000)
+    parser.add_argument("--frontend-port", type=int, default=int(os.getenv("FRONTEND_PORT", "5173")))
+    parser.add_argument("--backend-port", type=int, default=int(os.getenv("BACKEND_PORT", "8008")))
     args = parser.parse_args()
 
     backend_script = BACKEND_DIR / "app.py"
