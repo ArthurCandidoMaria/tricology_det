@@ -2,7 +2,8 @@ FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    YOLO_MODEL=/app/YOLO_MODEL/best_1.pt
+    YOLO_MODEL=/app/YOLO_MODEL/best_1.pt \
+    PIP_NO_CACHE_DIR=1
 
 WORKDIR /app
 
@@ -11,7 +12,9 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY backend/requirements.txt ./requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch torchvision \
+    && pip install --no-cache-dir -r requirements.txt \
+    && rm -rf /root/.cache/pip
 
 COPY backend/app.py ./app.py
 COPY backend/YOLO_MODEL ./YOLO_MODEL
