@@ -1,18 +1,23 @@
 import type { SessionPhoto, SessionWithPhotos } from './types';
-import { SCALP_AREAS } from './constants';
+import { SCALP_AREAS, areaLabel } from './constants';
 import { formatDate } from './formatters';
+
+export { areaLabel };
 
 /** Uma sessão, vista pela ótica de uma única área do couro cabeludo. */
 export interface AreaSessionPoint {
   sessionId: string;
   date: string;
   label: string;
-  /** Média das contagens das fotos desta área nesta sessão. */
+  /** Média de bulbos detectados das fotos desta área nesta sessão. */
   avg: number;
   min: number;
   max: number;
-  /** Quantas fotos tinham contagem — base da média. */
   countedPhotos: number;
+  /** Média de fios detectados na segmentação grayscale nesta área. */
+  avgStrands: number | null;
+  /** Espessura média dos fios (px) nesta área. */
+  avgThicknessPx: number | null;
   photos: SessionPhoto[];
 }
 
@@ -32,24 +37,23 @@ export interface AreaSummary {
   first: number | null;
   delta: number | null;
   deltaPct: number | null;
-  /** Só há tendência a partir de dois pontos. Sem isso, nada de seta nem cor. */
+  latestStrands: number | null;
+  latestThicknessPx: number | null;
   hasComparison: boolean;
   sessionCount: number;
   photoCount: number;
 }
 
-const AREA_LABELS = new Map<string, string>(SCALP_AREAS.map((a) => [a.value as string, a.label]));
 const AREA_ORDER = new Map<string, number>(SCALP_AREAS.map((a, i) => [a.value as string, i]));
 
-export function areaLabel(area: string): string {
-  return AREA_LABELS.get(area) ?? area;
+function meanOrNull(nums: Array<number | null | undefined>, decimals = 1): number | null {
+  const valid = nums.filter((n): n is number => n != null && !Number.isNaN(n));
+  if (valid.length === 0) return null;
+  const avg = valid.reduce((a, b) => a + b, 0) / valid.length;
+  const factor = 10 ** decimals;
+  return Math.round(avg * factor) / factor;
 }
 
-/**
- * Agrupa as fotos de todas as sessões por área, preservando a dispersão
- * (min/max) em vez de reduzir cada sessão a uma média isolada.
- * Áreas fora de SCALP_AREAS são mantidas no fim, para que nenhuma foto suma da tela.
- */
 export function buildAreaSummaries(sessions: SessionWithPhotos[]): AreaSummary[] {
   const ordered = [...sessions].sort((a, b) => a.session_date.localeCompare(b.session_date));
   const acc = new Map<string, { points: AreaSessionPoint[]; photos: AreaPhotoRef[]; sessionIds: Set<string> }>();
@@ -75,16 +79,21 @@ export function buildAreaSummaries(sessions: SessionWithPhotos[]): AreaSummary[]
         .map((p) => p.hair_count)
         .filter((n): n is number => n != null && !Number.isNaN(n));
 
-      if (counts.length > 0) {
+      const avgStrands = meanOrNull(photos.map((p) => p.strand_count), 1);
+      const avgThicknessPx = meanOrNull(photos.map((p) => p.avg_thickness_px), 2);
+
+      if (counts.length > 0 || avgStrands != null) {
         const sum = counts.reduce((a, b) => a + b, 0);
         entry.points.push({
           sessionId: session.id,
           date: session.session_date,
           label,
-          avg: Math.round(sum / counts.length),
-          min: Math.min(...counts),
-          max: Math.max(...counts),
+          avg: counts.length > 0 ? Math.round(sum / counts.length) : 0,
+          min: counts.length > 0 ? Math.min(...counts) : 0,
+          max: counts.length > 0 ? Math.max(...counts) : 0,
           countedPhotos: counts.length,
+          avgStrands,
+          avgThicknessPx,
           photos,
         });
       }
@@ -101,6 +110,9 @@ export function buildAreaSummaries(sessions: SessionWithPhotos[]): AreaSummary[]
     const delta = hasComparison && latest != null && first != null ? latest - first : null;
     const deltaPct = hasComparison && first ? ((latest! - first) / first) * 100 : null;
 
+    const latestWithStrands = [...points].reverse().find((p) => p.avgStrands != null);
+    const latestWithThickness = [...points].reverse().find((p) => p.avgThicknessPx != null);
+
     summaries.push({
       area,
       label: areaLabel(area),
@@ -110,6 +122,8 @@ export function buildAreaSummaries(sessions: SessionWithPhotos[]): AreaSummary[]
       first,
       delta,
       deltaPct,
+      latestStrands: latestWithStrands?.avgStrands ?? null,
+      latestThicknessPx: latestWithThickness?.avgThicknessPx ?? null,
       hasComparison,
       sessionCount: entry.sessionIds.size,
       photoCount: entry.photos.length,
@@ -123,7 +137,6 @@ export function buildAreaSummaries(sessions: SessionWithPhotos[]): AreaSummary[]
   });
 }
 
-/** Rótulo de dispersão das fotos de uma sessão: "9–16" quando há espalhamento. */
 export function spreadLabel(point: AreaSessionPoint): string | null {
   if (point.countedPhotos < 2 || point.min === point.max) return null;
   return `${point.min}–${point.max}`;

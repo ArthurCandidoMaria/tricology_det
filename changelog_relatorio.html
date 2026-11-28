@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Changelog e Oportunidades de Melhoria - Sistema de Análise Capilar</title>
+<style>
+  @page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+      content: counter(page);
+    }
+  }
+
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.55;
+    font-size: 10.5pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Header e Capa */
+  .header-card {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: #ffffff;
+    padding: 28px 24px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .header-tag {
+    display: inline-block;
+    background: rgba(59, 130, 246, 0.3);
+    border: 1px solid rgba(147, 197, 253, 0.4);
+    color: #93c5fd;
+    font-size: 8pt;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+  }
+
+  .header-title {
+    font-size: 21pt;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .header-subtitle {
+    font-size: 11pt;
+    color: #cbd5e1;
+    margin: 0 0 16px 0;
+    font-weight: 400;
+  }
+
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-size: 8.5pt;
+    color: #94a3b8;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 12px;
+  }
+
+  .header-meta span strong {
+    color: #ffffff;
+  }
+
+  /* Títulos de Sessões */
+  h2 {
+    color: #0f172a;
+    font-size: 13.5pt;
+    font-weight: 700;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 6px;
+    margin-top: 26px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+  }
+
+  h2 .num-badge {
+    background: #2563eb;
+    color: white;
+    font-size: 9pt;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    font-weight: bold;
+  }
+
+  h3 {
+    color: #1e3a8a;
+    font-size: 11pt;
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin: 0 0 10px 0;
+    text-align: justify;
+  }
+
+  /* Cartões e Seções */
+  .card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+
+  .card-highlight {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+    border-left: 4px solid #2563eb;
+  }
+
+  .card-warning {
+    background: #fffbeb;
+    border-color: #fde68a;
+    border-left: 4px solid #d97706;
+  }
+
+  /* Badges de Status */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 7.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .badge-done {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+  }
+
+  .badge-pending {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+  }
+
+  .badge-critical {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+  }
+
+  .badge-future {
+    background: #ede9fe;
+    color: #5b21b6;
+    border: 1px solid #ddd6fe;
+  }
+
+  /* Listas com ícones customizados */
+  ul {
+    margin: 0 0 12px 0;
+    padding-left: 20px;
+  }
+
+  li {
+    margin-bottom: 6px;
+  }
+
+  li strong {
+    color: #0f172a;
+  }
+
+  /* Tabelas */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 9pt;
+  }
+
+  th, td {
+    padding: 8px 10px;
+    border: 1px solid #cbd5e1;
+    text-align: left;
+  }
+
+  th {
+    background: #f1f5f9;
+    color: #0f172a;
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  /* Quebras de página controladas */
+  .page-break {
+    page-break-before: always;
+  }
+
+  .no-break {
+    page-break-inside: avoid;
+  }
+
+  .footer-note {
+    font-size: 8pt;
+    color: #64748b;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 8px;
+    margin-top: 24px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+  <!-- CABEÇALHO EXECUTIVO -->
+  <div class="header-card">
+    <div class="header-tag">Relatório Executivo & Técnico</div>
+    <div class="header-title">Sistema de Análise e Tricoscopia Capilar</div>
+    <div class="header-subtitle">Changelog Consolidado & Plano Estratégico de Melhorias (Detecção de Fios, Bulbos, Calibre e Qualidade)</div>
+    <div class="header-meta">
+      <span><strong>Documento:</strong> Changelog & Backlog Estruturado</span>
+      <span><strong>Status:</strong> Em Desenvolvimento Ativo</span>
+      <span><strong>Data:</strong> Novembro / 2026</span>
+      <span><strong>Versão Base:</strong> v0.2.0 &rarr; Planejada: v0.3.0+</span>
+    </div>
+  </div>
+
+  <!-- TÓPICO 1: VISÃO GERAL -->
+  <div class="no-break">
+    <h2><span class="num-badge">1</span> Visão Geral e Objetivo do Projeto</h2>
+    <p>
+      O projeto tem como foco principal o desenvolvimento de uma solução tecnológica robusta voltada à <strong>tricoscopia digital e tricometria assistida por inteligência artificial</strong>. A finalidade clínica e de pesquisa é permitir que especialistas, dermatologistas e tricologistas realizem avaliações capilares de alta precisão através de imagens dermoscópicas.
+    </p>
+    <div class="card card-highlight">
+      <strong>Core do Sistema:</strong>
+      <ul>
+        <li><strong>Detecção e contagem de fios e unidades foliculares</strong> em múltiplas regiões do couro cabeludo (frontal, vértex, occipital, temporal).</li>
+        <li><strong>Medição micrométrica do calibre (espessura) individual dos fios</strong> com classificação em miniaturizados (vellus), intermediários e terminais.</li>
+        <li><strong>Avaliação morfológica e qualitativa do bulbo capilar</strong>, viabilizando análises de eflúvio, alopécias e viabilidade de folículos em transplantes capilares (FUE/FUT).</li>
+        <li><strong>Acompanhamento longitudinal de evolução</strong> com gráficos comparativos e geração de laudos formais.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TÓPICO 2: O QUE JÁ FOI FEITO -->
+  <div class="no-break">
+    <h2><span class="num-badge">2</span> O Que Já Foi Feito no Projeto (Changelog Consolidado)</h2>
+    <p>
+      O projeto conta com uma arquitetura fullstack funcional e um pipeline inicial de Visão Computacional. Abaixo está a síntese de todas as entregas concluídas organizadas por frente de trabalho:
+    </p>
+  </div>
+
+  <div class="no-break">
+    <h3>2.1. Inteligência Artificial e Visão Computacional (Baseline)</h3>
+    <div class="card">
+      <ul>
+        <li>
+          <span class="badge badge-done">Concluído</span> <strong>Treinamento e Inferência YOLO:</strong> Modelos treinados (série <code>calvo_*</code> e <code>follicle_counter</code>) baseados em YOLOv8/v11 para detecção e contagem de folículos capilares através de caixas delimitadoras (bounding boxes).
+        </li>
+        <li>
+          <span class="badge badge-done">Concluído</span> <strong>Pipeline de Anotação e Conversão:</strong> Scripts de conversão de anotações poligonais e de caixas geradas no <code>LabelMe</code> para o padrão YOLO (<code>labelme_yolo.py</code>), permitindo alimentar o pipeline de treino supervisionado.
+        </li>
+        <li>
+          <span class="badge badge-done">Concluído</span> <strong>Data Augmentation Tricoscópico:</strong> Implementação do módulo <code>aug_ds.py</code> com transformações geométricas e fotométricas para aumentar a robustez do modelo frente a variações de iluminação e ângulos.
+        </li>
+        <li>
+          <span class="badge badge-done">Concluído</span> <strong>Pesquisa em Heatmaps e Densidade:</strong> Desenvolvimento de rede neural convolucional para mapas de calor (<code>heatmap.py</code>, <code>infer_heat.py</code>, <code>best_heatmap_model.pth</code>), visando mapear a concentração de folículos em áreas de alta densidade onde caixas delimitadoras colidem.
+        </li>
+        <li>
+          <span class="badge badge-done">Concluído</span> <strong>Inferência em Tons de Cinza:</strong> Rotina especializada <code>infer.py</code> com pré-processamento grayscale e reconstrução de 3 canais com resolução ampliada (1536px) para acentuar o contraste haste/couro cabeludo.
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="no-break">
+    <h3>2.2. Backend & Arquitetura de Serviços (FastAPI + SQLite)</h3>
+    <div class="card">
+      <ul>
+        <li>
+          <span class="badge badge-done">Concluído</span> <strong>API REST em FastAPI:</strong> Criação de servidor assíncrono (<code>backend/app.py</code>) com endpoints estruturados para pacientes, sessões, fotos e análise automatizada.
+        </li>
+        <li>
+          <span class="badge badge-done">Concluído</span> <strong>Persistência e Modelagem de Dados:</strong> Banco de dados relacional em SQLite com suporte a chaves estrangeiras e integridade referencial:
+            <ul>
+              <li><code>patients</code>: cadastro clínico, CPF, contato e histórico;</li>
+              <li><code>sessions</code>: registro temporal de consultas com total de fios contabilizados;</li>
+              <li><code>session_photos</code>: imagens originais e anotadas particionadas por região anatômica (frontal, vértex, occipital, temporal).</li>
+            </ul>
+        </li>
+        <li>
+          <span class="badge badge-done">Concluído</span> <strong>Endpoint de Análise em Tempo Real:</strong> Rota <code>/api/analyze</code> que recebe a foto dermatoscópica, executa o modelo YOLO, renderiza as caixas com plot de alta definição, gera imagem anotada e salva em disco com URL pública e payload JSON estruturado.
+        </li>
+        <li>
+          <span class="badge badge-done">Concluído</span> <strong>Armazenamento Local Estruturado:</strong> Módulo de storage particionado por pastas de sessão (<code>/storage/session-photos/{session_id}</code>), servido via <code>StaticFiles</code> com normalização de URLs.
+        </li>
+        <li>
+          <span class="badge badge-done">Concluído</span> <strong>Orquestrador server.py:</strong> Script unificado que inicializa o backend FastAPI (Uvicorn na porta 8000) e o frontend Vite (na porta 5173) de forma sincronizada com monitoramento de processos.
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="no-break">
+    <h3>2.3. Frontend & Aplicação do Especialista (React + TypeScript + Tailwind)</h3>
+    <div class="card">
+      <ul>
+        <li>
+          <span class="badge badge-done">Concluído</span> <strong>Gestão de Pacientes:</strong> Telas completas para cadastro de novos pacientes (<code>RegisterPatient.tsx</code>) e listagem/seleção com busca rápida (<code>SelectPatient.tsx</code>).
+        </li>
+        <li>
+          <span class="badge badge-done">Concluído</span> <strong>Fluxo de Nova Sessão:</strong> Interface orientada a quadrantes anatômicos (<code>NewSession.tsx</code>) permitindo capturar e carregar imagens dedicadas por região do couro cabeludo.
+        </li>
+        <li>
+          <span class="badge badge-done">Concluído</span> <strong>Dashboards Analíticos:</strong>
+            <ul>
+              <li>Visão por área e por sessão (<code>AnalyzeByArea.tsx</code>, <code>AnalyzeBySession.tsx</code>);</li>
+              <li>Gráficos de evolução temporal (<code>ProgressChart.tsx</code>) demonstrando o ganho ou perda de fios ao longo das consultas;</li>
+              <li>Visualização comparativa de foto original vs. foto anotada pelo modelo.</li>
+            </ul>
+        </li>
+        <li>
+          <span class="badge badge-done">Concluído</span> <strong>Containerização:</strong> Configurações completas de <code>docker-compose.yml</code>, <code>Dockerfile.backend</code> e <code>Dockerfile.frontend</code> para deploy padronizado.
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TÓPICO 3: O QUE AINDA PODE MELHORAR -->
+  <div class="no-break">
+    <h2><span class="num-badge">3</span> O Que Ainda Pode Melhorar (Gaps e Próximos Passos)</h2>
+    <p>
+      Apesar da fundação técnica sólida, o sistema atual opera primariamente com <strong>detecção por caixas (bounding boxes)</strong> e <strong>contagem global</strong>. Para alcançar a meta clínica de mensuração de <em>espessura de fio</em> e <em>qualidade de bulbo</em>, identificam-se as seguintes frentes prioritárias de evolução:
+    </p>
+  </div>
+
+  <div class="no-break">
+    <h3>3.1. Transição para Segmentação de Instância (YOLO-Seg)</h3>
+    <div class="card card-warning">
+      <div style="margin-bottom: 6px;">
+        <span class="badge badge-critical">Prioridade Crítica</span>
+        <span class="badge badge-pending">Visão Computacional</span>
+      </div>
+      <p>
+        <strong>Limitação Atual:</strong> Caixas retangulares (bounding boxes) não fornecem a geometria contínua do fio de cabelo, nem delimitam com exatidão a curvatura e as bordas necessárias para medir espessura ou inspecionar a raiz.
+      </p>
+      <p><strong>O que deve ser implementado:</strong></p>
+      <ul>
+        <li><strong>Dataset com Segmentação Poligonal:</strong> Rotular o contorno preciso de hastes capilares (<code>hair_shaft</code>) e bulbos (<code>hair_bulb</code>) individualmente.</li>
+        <li><strong>Treinamento de YOLO-Seg (YOLOv8-Seg / YOLOv11-Seg):</strong> Substituir o modelo atual de detecção por um modelo de segmentação de instâncias com saída em máscaras binárias por elemento.</li>
+        <li><strong>Separação Funcional de Classes:</strong> Distinguir unidades foliculares (onde os fios nascem agrupados) dos fios individuais e dos bulbos expostos.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="no-break">
+    <h3>3.2. Módulo de Cálculo de Espessura do Fio (Tricometria Micrométrica)</h3>
+    <div class="card card-warning">
+      <div style="margin-bottom: 6px;">
+        <span class="badge badge-critical">Prioridade Crítica</span>
+        <span class="badge badge-pending">Novo Módulo</span>
+      </div>
+      <p>
+        <strong>Objetivo:</strong> Fornecer a medição precisa da espessura do fio em micrômetros (&mu;m), elemento chave no diagnóstico de miniaturização capilar (Alopecia Androgenética).
+      </p>
+      <p><strong>Engenharia do Algoritmo:</strong></p>
+      <ul>
+        <li><strong>Esqueletização (Medline):</strong> Aplicar algoritmo de afinamento morfológico (Zhang-Suen ou Medial Axis Transform) sobre a máscara segmentada de cada haste para encontrar a linha dorsal central do fio.</li>
+        <li><strong>Amostragem por Vetores Normais:</strong> Ao longo do esqueleto do fio, calcular as retas ortogonais (perpendiculares) à curvatura e computar a largura em pixels entre as bordas da máscara.</li>
+        <li><strong>Calibração Óptica (&mu;m/px):</strong> Implementar suporte a perfis de lentes (ex: DermLite, Dino-Lite) ou régua de calibração milimétrica para conversão exata de pixels em &mu;m:
+          <div style="background: #fff; padding: 6px 12px; border-radius: 4px; border: 1px dashed #cbd5e1; margin: 6px 0; font-family: monospace;">
+            Espessura (&mu;m) = Largura_em_Pixels &times; Fator_Calibração_(&mu;m/pixel)
+          </div>
+        </li>
+        <li><strong>Classificação Clínica Tricológica:</strong>
+          <ul>
+            <li><strong>Fio Vellus / Miniaturizado:</strong> &lt; 30 &mu;m</li>
+            <li><strong>Fio Intermediário:</strong> 30 &mu;m a 50 &mu;m</li>
+            <li><strong>Fio Terminal:</strong> &gt; 50 &mu;m</li>
+          </ul>
+        </li>
+        <li><strong>Índice de Miniaturização:</strong> Calcular automaticamente a porcentagem de fios vellus em relação ao total da região (alerta clínico quando &gt; 20%).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <div class="no-break">
+    <h3>3.3. Módulo de Avaliação da Qualidade do Bulbo Capilar</h3>
+    <div class="card card-warning">
+      <div style="margin-bottom: 6px;">
+        <span class="badge badge-critical">Prioridade Crítica</span>
+        <span class="badge badge-pending">Novo Módulo</span>
+      </div>
+      <p>
+        <strong>Objetivo:</strong> Avaliar a saúde, vitalidade e preservação do bulbo e da papila dérmica, essencial para avaliação de alopécias cicatriciais e enxertos de transplante capilar.
+      </p>
+      <p><strong>Métricas e Escore Morfológico:</strong></p>
+      <ul>
+        <li><strong>Morfometria Geométrica:</strong> Cálculo de área total do bulbo, perímetro, elipsometria (eixo maior vs. eixo menor) e índice de circularidade.</li>
+        <li><strong>Integridade de Bainhas:</strong> Detecção de descolamentos ou fraturas da bainha radicular externa e interna.</li>
+        <li><strong>Densidade Óptica e Pigmentação:</strong> Avaliação do nível de melanina e textura da matriz capilar (distinguindo bulbos em anágena de bulbos telógenos miniaturizados).</li>
+        <li><strong>Bulb Quality Index (BQI):</strong> Algoritmo de escore normalizado (0 a 100) combinando simetria, área e consistência óptica, categorizando em:
+          <span class="badge badge-done" style="margin-left: 4px;">Excelente (85-100)</span>
+          <span class="badge badge-done" style="background:#e0f2fe; color:#0369a1; border-color:#bae6fd;">Bom (70-84)</span>
+          <span class="badge badge-pending">Regular (50-69)</span>
+          <span class="badge badge-critical">Distrófico / Comprometido (&lt;50)</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="no-break">
+    <h3>3.4. Melhorias no Backend e Arquitetura de Dados</h3>
+    <div class="card">
+      <div style="margin-bottom: 6px;">
+        <span class="badge badge-pending">Prioridade Média</span>
+        <span class="badge badge-future">Infraestrutura</span>
+      </div>
+      <ul>
+        <li><strong>Expansão do Schema do Banco de Dados:</strong> O schema atual armazena apenas <code>hair_count</code> na foto. É necessário criar tabelas filhas para persistir dados detalhados:
+          <ul>
+            <li><code>hair_shaft_measurements</code>: <code>id</code>, <code>photo_id</code>, <code>mean_thickness_um</code>, <code>min_thickness_um</code>, <code>category</code>, <code>coordinates_json</code>;</li>
+            <li><code>bulb_measurements</code>: <code>id</code>, <code>photo_id</code>, <code>area_um2</code>, <code>circularity</code>, <code>quality_score</code>, <code>status</code>.</li>
+          </ul>
+        </li>
+        <li><strong>Pipeline de Inferência Otimizado:</strong> Criação do endpoint especializado <code>/api/analyze-advanced</code> que executa a cadeia completa (segmentação + esqueleto + calibre + BQI) e retorna as métricas detalhadas.</li>
+        <li><strong>Fila de Processamento Assíncrono:</strong> Implementação de processamento em segundo plano (FastAPI BackgroundTasks ou Celery) para imagens dermatoscópicas ultra-pesadas (acima de 4K/8K).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="no-break">
+    <h3>3.5. Melhorias no Frontend e Experiência do Especialista</h3>
+    <div class="card">
+      <div style="margin-bottom: 6px;">
+        <span class="badge badge-pending">Prioridade Média</span>
+        <span class="badge badge-future">Interface do Usuário</span>
+      </div>
+      <ul>
+        <li><strong>Visualizador Interativo com Camadas (Layers):</strong> Canvas interativo com zoom e pan onde o profissional pode ligar/desligar:
+          <ul>
+            <li>Camada 1: Contorno das hastes capilares;</li>
+            <li>Camada 2: Linha de espessura com tag de valor em &mu;m sobre cada fio;</li>
+            <li>Camada 3: Destaque e score dos bulbos capilares;</li>
+            <li>Camada 4: Mapa de calor de densidade folicular.</li>
+          </ul>
+        </li>
+        <li><strong>Painel de Tricometria e Histogramas:</strong> Exibição de gráficos de distribuição de calibre (curva gaussiana de espessura de fios) e indicador visual da taxa de miniaturização.</li>
+        <li><strong>Ferramenta de Calibração Manual:</strong> Régua interativa na tela para o operador traçar 1 mm na imagem da lente e salvar a escala de resolução.</li>
+        <li><strong>Emissão de Laudos em PDF Clínicos:</strong> Funcionalidade com 1 clique para gerar um relatório completo da consulta com fotos antes/depois, métricas e recomendações para entrega ao paciente.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TÓPICO 4: MATRIZ DE PRIORIZAÇÃO -->
+  <div class="no-break">
+    <h2><span class="num-badge">4</span> Matriz de Priorização e Plano de Entregas</h2>
+    <p>Resumo dos itens a implementar ordenados pelo impacto clínico e facilidade de execução:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Item / Iniciativa</th>
+          <th>Prioridade</th>
+          <th>Complexidade</th>
+          <th>Impacto Clínico</th>
+          <th>Fase Sugerida</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Segmentação de Instância (YOLO-Seg)</strong></td>
+          <td><span class="badge badge-critical">Crítica</span></td>
+          <td>Média</td>
+          <td>Estrutural / Essencial</td>
+          <td>Fase 1 (v0.3.0)</td>
+        </tr>
+        <tr>
+          <td><strong>Cálculo de Calibre em &mu;m (Esqueletização)</strong></td>
+          <td><span class="badge badge-critical">Crítica</span></td>
+          <td>Média-Alta</td>
+          <td>Altíssimo (Diagnóstico de AAG)</td>
+          <td>Fase 1 (v0.3.0)</td>
+        </tr>
+        <tr>
+          <td><strong>Atualização do Schema do Banco (Métricas)</strong></td>
+          <td><span class="badge badge-done">Alta</span></td>
+          <td>Baixa</td>
+          <td>Consistência de Dados</td>
+          <td>Fase 1 (v0.3.0)</td>
+        </tr>
+        <tr>
+          <td><strong>Morfometria e Score do Bulbo (BQI)</strong></td>
+          <td><span class="badge badge-critical">Crítica</span></td>
+          <td>Alta</td>
+          <td>Altíssimo (Transplante / Eflúvio)</td>
+          <td>Fase 2 (v0.4.0)</td>
+        </tr>
+        <tr>
+          <td><strong>Visualizador de Camadas Toggáveis</strong></td>
+          <td><span class="badge badge-done">Alta</span></td>
+          <td>Média</td>
+          <td>Experiência do Usuário</td>
+          <td>Fase 2 (v0.4.0)</td>
+        </tr>
+        <tr>
+          <td><strong>Histograma de Calibre & Miniaturização</strong></td>
+          <td><span class="badge badge-done">Alta</span></td>
+          <td>Baixa-Média</td>
+          <td>Interpretação Médica</td>
+          <td>Fase 2 (v0.4.0)</td>
+        </tr>
+        <tr>
+          <td><strong>Geração de Laudos em PDF para Paciente</strong></td>
+          <td><span class="badge badge-pending">Média</span></td>
+          <td>Média</td>
+          <td>Comercial e Prontuário</td>
+          <td>Fase 3 (v1.0.0)</td>
+        </tr>
+        <tr>
+          <td><strong>Comparativo Longitudinal Lado a Lado</strong></td>
+          <td><span class="badge badge-pending">Média</span></td>
+          <td>Média</td>
+          <td>Acompanhamento de Tratamento</td>
+          <td>Fase 3 (v1.0.0)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer-note">
+    Documento gerado automaticamente pelo Assistente Técnico do Projeto | Sistema de Tricoscopia Inteligente &bull; 2026
+  </div>
+
+</body>
+</html>

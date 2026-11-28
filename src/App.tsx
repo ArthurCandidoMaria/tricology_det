@@ -9,8 +9,7 @@ import { SelectArea } from '@/screens/SelectArea';
 import { AreaDashboard } from '@/screens/AreaDashboard';
 import { SessionDashboard } from '@/screens/SessionDashboard';
 import { AnalyzeBySession } from '@/screens/AnalyzeBySession';
-import type { Patient } from '@/lib/types';
-import type { SessionWithPhotos } from '@/lib/types';
+import type { Patient, SessionWithPhotos } from '@/lib/types';
 import type { AreaSummary } from '@/lib/areaStats';
 
 type View =
@@ -46,7 +45,13 @@ function App() {
 
   return (
     <div className="min-h-screen bg-ink-50">
-      {view !== 'home' && <Header onHome={goHome} />}
+      {view !== 'home' && (
+        <Header
+          onHome={goHome}
+          patientName={patient?.name ?? null}
+          onPatientClick={patient ? () => openDashboard(patient) : undefined}
+        />
+      )}
 
       {view === 'home' && (
         <Home onRegister={() => setView('register')} onUpdate={() => setView('select')} />
@@ -57,13 +62,18 @@ function App() {
       )}
 
       {view === 'select' && (
-        <SelectPatient onBack={goHome} onSelect={openDashboard} />
+        <SelectPatient
+          onBack={goHome}
+          onSelect={openDashboard}
+          onRegisterNew={() => setView('register')}
+        />
       )}
 
       {view === 'dashboard' && patient && (
         <Dashboard
           patient={patient}
-          onBack={goHome}
+          onPatientUpdated={setPatient}
+          onBack={() => setView('select')}
           onNewSession={() => {
             setSelectedSession(null);
             setView('new-session');
@@ -72,6 +82,10 @@ function App() {
           onAnalyzeByArea={() => {
             setSelectedArea(null);
             setView('select-area');
+          }}
+          onOpenSession={(session) => {
+            setSelectedSession(session);
+            setView('session-dashboard');
           }}
         />
       )}
@@ -91,15 +105,19 @@ function App() {
         <SessionDashboard
           patient={patient}
           session={selectedSession}
-          onBack={() => setView('dashboard')}
+          onBack={() => setView('analyze-session')}
           onUpdate={() => setView('new-session')}
+          onDeleted={() => {
+            setSelectedSession(null);
+            setView('dashboard');
+          }}
         />
       )}
 
       {view === 'new-session' && patient && (
         <NewSession
           patient={patient}
-          sessionId={view === 'new-session' && selectedSession ? selectedSession.id : undefined}
+          sessionId={selectedSession ? selectedSession.id : undefined}
           onBack={() => setView(selectedSession ? 'session-dashboard' : 'dashboard')}
           onSaved={() => {
             setSelectedSession(null);
@@ -120,7 +138,11 @@ function App() {
       )}
 
       {view === 'area-dashboard' && patient && selectedArea && (
-        <AreaDashboard patient={patient} area={selectedArea} onBack={() => setView('select-area')} />
+        <AreaDashboard
+          patient={patient}
+          area={selectedArea}
+          onBack={() => setView('select-area')}
+        />
       )}
     </div>
   );

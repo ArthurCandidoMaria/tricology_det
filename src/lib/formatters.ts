@@ -1,9 +1,3 @@
-/**
- * Converte a data vinda do banco em Date local.
- * "2026-09-01" sem hora e interpretado pelo JS como UTC; em fusos negativos
- * (America/Sao_Paulo) isso joga o dia para tras e a sessao aparece com a
- * data errada. Aqui a data-only e montada em horario local.
- */
 function parseDate(dateStr: string | null): Date | null {
   if (!dateStr) return null;
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr.trim());
@@ -33,9 +27,17 @@ export function formatDateLong(dateStr: string | null): string {
   });
 }
 
-export function formatNumber(n: number | null | undefined): string {
-  if (n == null) return '—';
-  return n.toLocaleString('pt-BR');
+export function formatNumber(n: number | null | undefined, maxDecimals = 0): string {
+  if (n == null || Number.isNaN(n)) return '—';
+  return n.toLocaleString('pt-BR', {
+    minimumFractionDigits: maxDecimals > 0 ? maxDecimals : 0,
+    maximumFractionDigits: maxDecimals,
+  });
+}
+
+export function formatThickness(px: number | null | undefined): string {
+  if (px == null || Number.isNaN(px)) return '—';
+  return `${formatNumber(px, 2)} px`;
 }
 
 export function calcAge(dateOfBirth: string | null): number | null {

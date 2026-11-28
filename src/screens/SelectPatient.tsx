@@ -1,46 +1,63 @@
 import { useEffect, useState } from 'react';
-import { ArrowLeft, Search, UserCircle2, Loader2, Inbox } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { ArrowLeft, Calendar, Inbox, Loader2, Search, UserCircle2, UserPlus } from 'lucide-react';
+import { listPatients } from '@/lib/api';
+import { formatDate, maskCPF } from '@/lib/formatters';
 import type { Patient } from '@/lib/types';
-import { formatDate } from '@/lib/formatters';
 
 interface Props {
   onBack: () => void;
   onSelect: (patient: Patient) => void;
+  onRegisterNew: () => void;
 }
 
-export function SelectPatient({ onBack, onSelect }: Props) {
+export function SelectPatient({ onBack, onSelect, onRegisterNew }: Props) {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    (async () => {
-      const { data, error } = await supabase
-        .from('patients')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      setLoading(false);
-      if (!error && data) setPatients(data as Patient[]);
-    })();
+    let active = true;
+    listPatients()
+      .then((data) => {
+        if (active) setPatients(data);
+      })
+      .catch((err) => {
+        if (active) setError(err instanceof Error ? err.message : 'Erro ao carregar pacientes.');
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => {
+      active = false;
+    };
   }, []);
 
-  const filtered = patients.filter((p) =>
-    p.name.toLowerCase().includes(query.toLowerCase()) ||
-    (p.cpf ?? '').includes(query) ||
-    (p.email ?? '').toLowerCase().includes(query.toLowerCase()),
+  const normalizedQuery = query.trim().toLowerCase();
+  const filtered = patients.filter(
+    (p) =>
+      p.name.toLowerCase().includes(normalizedQuery) ||
+      (p.cpf ?? '').replace(/\D/g, '').includes(normalizedQuery.replace(/\D/g, '') || '__nomatch__') ||
+      (p.cpf ?? '').toLowerCase().includes(normalizedQuery) ||
+      (p.email ?? '').toLowerCase().includes(normalizedQuery),
   );
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 animate-slide-up">
-      <button onClick={onBack} className="btn-ghost mb-6 -ml-2">
-        <ArrowLeft size={18} /> Voltar
-      </button>
+      <div className="flex items-center justify-between gap-3 mb-6">
+        <button onClick={onBack} className="btn-ghost -ml-2">
+          <ArrowLeft size={18} /> Voltar
+        </button>
+        <button onClick={onRegisterNew} className="btn-secondary py-2 px-4 text-xs">
+          <UserPlus size={15} /> Novo paciente
+        </button>
+      </div>
 
       <div className="mb-6">
-        <h1 className="font-display text-2xl font-bold text-ink-900">Selecionar paciente</h1>
-        <p className="text-sm text-ink-500 mt-1">Escolha um paciente para visualizar o painel e o progresso.</p>
+        <h1 className="font-display text-2xl font-bold text-ink-900">Pacientes</h1>
+        <p className="text-sm text-ink-500 mt-1">
+          Selecione um prontuário para visualizar a tricoscopia e o histórico de sessões.
+        </p>
       </div>
 
       <div className="relative mb-5">
@@ -50,8 +67,15 @@ export function SelectPatient({ onBack, onSelect }: Props) {
           placeholder="Buscar por nome, CPF ou e-mail..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          autoFocus
         />
       </div>
+
+      {error && (
+        <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700 mb-5">
+          {error}
+        </div>
+      )}
 
       {loading ? (
         <div className="flex items-center justify-center py-20 text-ink-400">
@@ -63,7 +87,9 @@ export function SelectPatient({ onBack, onSelect }: Props) {
             <Inbox size={28} className="text-ink-400" />
           </div>
           <p className="text-ink-500 font-medium">
-            {patients.length === 0 ? 'Nenhum paciente cadastrado ainda.' : 'Nenhum paciente corresponde à sua busca.'}
+            {patients.length === 0
+              ? 'Nenhum paciente cadastrado ainda.'
+              : 'Nenhum paciente corresponde à sua busca.'}
           </p>
         </div>
       ) : (
@@ -79,13 +105,23 @@ export function SelectPatient({ onBack, onSelect }: Props) {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-ink-900 truncate">{p.name}</p>
-                <p className="text-sm text-ink-400 truncate">
-                  {p.cpf ? `CPF: ${p.cpf}` : p.email || 'Sem contato'}
+                <p className="text-xs text-ink-400 truncate mt-0.5">
+                  {p.cpf ? `CPF: ${maskCPF(p.cpf)}` : p.email || 'Sem contato'}
+                  {p.session_count != null && (
+                    <span>
+                      {' '}
+                      · {p.session_count} {p.session_count === 1 ? 'sessão' : 'sessões'}
+                    </span>
+                  )}
                 </p>
               </div>
               <div className="text-right flex-shrink-0">
-                <p className="text-xs text-ink-400">Cadastrado</p>
-                <p className="text-sm font-medium text-ink-600">{formatDate(p.created_at)}</p>
+                <p className="text-[11px] text-ink-400 flex items-center justify-end gap-1">
+                  <Calendar size={11} /> {p.last_session_date ? 'Última consulta' : 'Cadastrado'}
+                </p>
+                <p className="text-sm font-medium text-ink-600">
+                  {formatDate(p.last_session_date || p.created_at)}
+                </p>
               </div>
             </button>
           ))}

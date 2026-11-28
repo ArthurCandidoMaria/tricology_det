@@ -2,7 +2,7 @@ FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    YOLO_MODEL=/app/YOLO_MODEL/best_1.pt \
+    YOLO_MODEL=/app/YOLO_MODEL/best.pt \
     PIP_NO_CACHE_DIR=1
 
 WORKDIR /app
@@ -17,6 +17,7 @@ RUN pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu 
     && rm -rf /root/.cache/pip
 
 COPY backend/app.py ./app.py
+COPY backend/hair_segmentation.py ./hair_segmentation.py
 COPY backend/YOLO_MODEL ./YOLO_MODEL
 
 RUN mkdir -p /app/storage /app/tmp

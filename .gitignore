@@ -21,3 +21,9 @@ dist-ssr
 *.sln
 *.sw?
 .env
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.csv
+*.txt

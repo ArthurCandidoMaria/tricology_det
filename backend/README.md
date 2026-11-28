@@ -1,6 +1,6 @@
-# Backend de análise de cabelo com YOLO
+# Backend de análise tricoscópica (Visão Computacional — Sem Rede Neural)
 
-Este serviço expõe uma API em FastAPI para receber imagens do frontend, detectar objetos com YOLO e devolver uma imagem anotada para exibição.
+Este serviço expõe uma API em FastAPI para receber imagens tricoscópicas do frontend, segmentar fios e couro cabeludo em escala de cinza (`bitwise_not`), reconstruir os fios via `connectedComponentsWithStats`, rastrear cada fio até a entrada na cabeça para detectar e contar os bulbos, e devolver as máscaras e a imagem anotada para exibição.
 
 ## Como iniciar
 
@@ -19,26 +19,41 @@ Este serviço expõe uma API em FastAPI para receber imagens do frontend, detect
 
 ## Endpoints
 
-- GET /health
-- POST /api/analyze
+- `GET /health`
+- `POST /api/analyze`
+- `GET/POST/PATCH /api/patients`
+- `GET/POST/PATCH/DELETE /api/sessions`
+- `GET/POST/DELETE /api/session_photos`
 
-### Upload
+### Upload (`/api/analyze`)
 
 FormData esperado:
-- file: imagem
-- session_id: opcional
-- scalp_area: opcional
-- patient_id: opcional
+- `file`: imagem
+- `session_id`: opcional
+- `scalp_area`: opcional
+- `patient_id`: opcional
+- `hair_gray_max`: opcional (override manual da janela grayscale `0..255`)
 
 ### Resposta esperada
 
+```json
 {
-  "count": 3,
+  "count": 24,
+  "bulb_count": 24,
+  "strand_count": 128,
+  "avg_thickness_px": 4.2,
+  "hair_coverage_pct": 27.5,
+  "model_used": "hair-origin-tracking-v2",
   "detections": [
-    {"class": "hair", "confidence": 0.91, "bbox": [x1, y1, x2, y2]}
+    {
+      "class": "bulbo",
+      "confidence": 0.91,
+      "bbox": [110.0, 82.0, 132.0, 104.0],
+      "center": [121.0, 93.0]
+    }
   ],
-  "annotated_image_data_url": "data:image/png;base64,...",
-  "storage_url": "https://..."
+  "annotated_image_data_url": "data:image/png;base64,..."
 }
+```
 
-> Utiliza o modelo `yolov8n.pt` por padrão. Se o modelo não estiver disponível localmente, o Ultralytics fará o download automaticamente.
+> Não requer PyTorch, GPU ou pesos YOLO: todo o processamento roda em CPU com OpenCV, NumPy e scikit-image.

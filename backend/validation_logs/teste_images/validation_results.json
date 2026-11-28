@@ -1,0 +1,919 @@
+{
+  "summary": {
+    "timestamp": "2026-11-25T22:37:54",
+    "input_dir": "C:\\Users\\arthu\\OneDrive\\Documents\\frontend_hair\\teste_images",
+    "output_dir": "C:\\Users\\arthu\\OneDrive\\Documents\\frontend_hair\\backend\\validation_logs\\teste_images",
+    "model_used": "C:\\Users\\arthu\\OneDrive\\Documents\\frontend_hair\\backend\\YOLO_MODEL\\best_1.pt",
+    "yolo_conf_threshold": 0.25,
+    "yolo_iou_threshold": 0.45,
+    "hair_gray_max_override": null,
+    "images_evaluated": 16,
+    "total_bulbs_detected": 42,
+    "avg_bulbs_per_image": 2.62,
+    "total_strands_detected": 2022,
+    "avg_strands_per_image": 126.38,
+    "avg_thickness_px": 4.2,
+    "avg_coverage_pct": 27.2,
+    "yolo_mean_confidence_pct": 31.32,
+    "avg_inference_ms": 882.5,
+    "bulbs_accuracy": {
+      "evaluated_images": 0,
+      "count_accuracy_pct": null,
+      "mae": null,
+      "rmse": null,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null
+    },
+    "strands_accuracy": {
+      "evaluated_images": 0,
+      "count_accuracy_pct": null,
+      "mae": null,
+      "rmse": null
+    }
+  },
+  "images": [
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.43.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 5,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 30.68,
+      "yolo_min_conf_pct": 26.71,
+      "yolo_max_conf_pct": 33.45,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 131,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.16,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 27.0,
+      "gray_threshold": 125.0,
+      "scalp_gray_median": 151.0,
+      "hair_gray_median": 56.0,
+      "inference_ms": 1286.2,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.43_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.3345,
+          "bbox": [
+            134.11648559570312,
+            344.47222900390625,
+            211.2349090576172,
+            436.521484375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3248,
+          "bbox": [
+            85.9562759399414,
+            302.8317565917969,
+            144.7044677734375,
+            388.79925537109375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3226,
+          "bbox": [
+            206.00277709960938,
+            241.40158081054688,
+            259.969970703125,
+            314.0960388183594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.285,
+          "bbox": [
+            258.48760986328125,
+            253.99850463867188,
+            321.7456970214844,
+            338.8320007324219
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2671,
+          "bbox": [
+            195.3458709716797,
+            82.27690124511719,
+            265.3587646484375,
+            167.80018615722656
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.44.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 2,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 35.33,
+      "yolo_min_conf_pct": 29.03,
+      "yolo_max_conf_pct": 41.62,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 101,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.54,
+      "median_thickness_px": 4.6,
+      "hair_coverage_pct": 19.0,
+      "gray_threshold": 108.0,
+      "scalp_gray_median": 123.0,
+      "hair_gray_median": 61.0,
+      "inference_ms": 468.8,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.44_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.4162,
+          "bbox": [
+            161.9791717529297,
+            110.27415466308594,
+            226.28732299804688,
+            199.71514892578125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2903,
+          "bbox": [
+            103.44760131835938,
+            89.33979034423828,
+            160.52426147460938,
+            158.64857482910156
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.45.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 0,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": null,
+      "yolo_min_conf_pct": null,
+      "yolo_max_conf_pct": null,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 138,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 3.94,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 29.1,
+      "gray_threshold": 127.0,
+      "scalp_gray_median": 162.0,
+      "hair_gray_median": 65.0,
+      "inference_ms": 1114.8,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.45_panel.png",
+      "detections": []
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.47.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 2,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 26.22,
+      "yolo_min_conf_pct": 25.55,
+      "yolo_max_conf_pct": 26.89,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 131,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.53,
+      "median_thickness_px": 4.6,
+      "hair_coverage_pct": 29.1,
+      "gray_threshold": 127.0,
+      "scalp_gray_median": 159.0,
+      "hair_gray_median": 53.0,
+      "inference_ms": 947.7,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.47_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.2689,
+          "bbox": [
+            298.3833312988281,
+            164.1033172607422,
+            353.4089050292969,
+            232.57635498046875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2555,
+          "bbox": [
+            234.75328063964844,
+            20.199321746826172,
+            292.9122009277344,
+            99.59782409667969
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.48.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 1,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 39.37,
+      "yolo_min_conf_pct": 39.37,
+      "yolo_max_conf_pct": 39.37,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 130,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.71,
+      "median_thickness_px": 5.0,
+      "hair_coverage_pct": 33.5,
+      "gray_threshold": 121.0,
+      "scalp_gray_median": 152.0,
+      "hair_gray_median": 52.0,
+      "inference_ms": 976.4,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.48_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.3937,
+          "bbox": [
+            558.4644165039062,
+            254.72531127929688,
+            630.921142578125,
+            339.310546875
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.49.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 5,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 31.7,
+      "yolo_min_conf_pct": 25.67,
+      "yolo_max_conf_pct": 39.36,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 115,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 3.99,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 20.5,
+      "gray_threshold": 126.0,
+      "scalp_gray_median": 145.0,
+      "hair_gray_median": 60.0,
+      "inference_ms": 562.6,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.49_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.3936,
+          "bbox": [
+            186.40306091308594,
+            369.3999328613281,
+            243.2847900390625,
+            447.4096374511719
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.338,
+          "bbox": [
+            114.88306427001953,
+            360.8229675292969,
+            165.39414978027344,
+            430.5265197753906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3088,
+          "bbox": [
+            190.773681640625,
+            1.4415397644042969,
+            263.27386474609375,
+            70.48377990722656
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2881,
+          "bbox": [
+            0.0,
+            130.7470703125,
+            50.828224182128906,
+            206.76953125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2567,
+          "bbox": [
+            259.5230712890625,
+            291.88262939453125,
+            319.9719543457031,
+            368.14654541015625
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.51.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 2,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 36.02,
+      "yolo_min_conf_pct": 29.43,
+      "yolo_max_conf_pct": 42.62,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 130,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.38,
+      "median_thickness_px": 4.6,
+      "hair_coverage_pct": 29.0,
+      "gray_threshold": 133.0,
+      "scalp_gray_median": 170.0,
+      "hair_gray_median": 61.0,
+      "inference_ms": 924.7,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.51_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.4262,
+          "bbox": [
+            0.0,
+            210.09454345703125,
+            50.82576370239258,
+            291.1471252441406
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2943,
+          "bbox": [
+            349.3804626464844,
+            357.84039306640625,
+            404.79974365234375,
+            433.1511535644531
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.53.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 5,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 30.11,
+      "yolo_min_conf_pct": 25.83,
+      "yolo_max_conf_pct": 38.37,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 127,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.09,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 26.0,
+      "gray_threshold": 124.0,
+      "scalp_gray_median": 154.0,
+      "hair_gray_median": 49.0,
+      "inference_ms": 811.1,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.53_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.3837,
+          "bbox": [
+            78.7090835571289,
+            271.4880065917969,
+            144.79649353027344,
+            352.99798583984375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3125,
+          "bbox": [
+            0.0,
+            112.90580749511719,
+            47.49702453613281,
+            189.86656188964844
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2892,
+          "bbox": [
+            152.0313720703125,
+            25.36434555053711,
+            229.17303466796875,
+            125.74357604980469
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2619,
+          "bbox": [
+            281.78350830078125,
+            67.32977294921875,
+            336.97247314453125,
+            142.1343994140625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2583,
+          "bbox": [
+            83.67190551757812,
+            184.10867309570312,
+            137.14205932617188,
+            255.369873046875
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.54.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 4,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 33.27,
+      "yolo_min_conf_pct": 26.48,
+      "yolo_max_conf_pct": 43.53,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 111,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.01,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 22.3,
+      "gray_threshold": 127.0,
+      "scalp_gray_median": 151.0,
+      "hair_gray_median": 52.0,
+      "inference_ms": 663.9,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.54_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.4353,
+          "bbox": [
+            68.76934051513672,
+            255.4459991455078,
+            132.46749877929688,
+            338.6922912597656
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3432,
+          "bbox": [
+            78.18345642089844,
+            164.80154418945312,
+            130.63575744628906,
+            239.8850555419922
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2877,
+          "bbox": [
+            145.36537170410156,
+            369.7507629394531,
+            208.11082458496094,
+            449.90509033203125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2648,
+          "bbox": [
+            161.25985717773438,
+            29.574691772460938,
+            227.6542205810547,
+            113.8092041015625
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.56.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 0,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": null,
+      "yolo_min_conf_pct": null,
+      "yolo_max_conf_pct": null,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 120,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.16,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 26.2,
+      "gray_threshold": 122.0,
+      "scalp_gray_median": 150.0,
+      "hair_gray_median": 51.0,
+      "inference_ms": 770.8,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.56_panel.png",
+      "detections": []
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.57.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 0,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": null,
+      "yolo_min_conf_pct": null,
+      "yolo_max_conf_pct": null,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 121,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.27,
+      "median_thickness_px": 4.6,
+      "hair_coverage_pct": 28.5,
+      "gray_threshold": 126.0,
+      "scalp_gray_median": 160.0,
+      "hair_gray_median": 51.0,
+      "inference_ms": 833.4,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.57_panel.png",
+      "detections": []
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.20.00.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 1,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 35.46,
+      "yolo_min_conf_pct": 35.46,
+      "yolo_max_conf_pct": 35.46,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 142,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.17,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 31.7,
+      "gray_threshold": 121.0,
+      "scalp_gray_median": 151.0,
+      "hair_gray_median": 56.0,
+      "inference_ms": 1031.8,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.20.00_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.3546,
+          "bbox": [
+            279.1101989746094,
+            0.0,
+            362.8200378417969,
+            92.49372863769531
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.20.02.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 7,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 30.85,
+      "yolo_min_conf_pct": 26.35,
+      "yolo_max_conf_pct": 39.39,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 123,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.02,
+      "median_thickness_px": 4.6,
+      "hair_coverage_pct": 27.8,
+      "gray_threshold": 127.0,
+      "scalp_gray_median": 159.0,
+      "hair_gray_median": 51.0,
+      "inference_ms": 824.4,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.20.02_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.3939,
+          "bbox": [
+            415.7530212402344,
+            342.5217590332031,
+            466.33990478515625,
+            409.47161865234375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3612,
+          "bbox": [
+            230.63803100585938,
+            151.77682495117188,
+            305.74432373046875,
+            243.73123168945312
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3145,
+          "bbox": [
+            95.09859466552734,
+            112.33979797363281,
+            165.54946899414062,
+            199.65037536621094
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2882,
+          "bbox": [
+            557.7919311523438,
+            228.0699005126953,
+            616.7901000976562,
+            311.7872314453125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2707,
+          "bbox": [
+            72.56531524658203,
+            0.34744834899902344,
+            134.7749786376953,
+            54.87265396118164
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2677,
+          "bbox": [
+            367.2818908691406,
+            295.07464599609375,
+            422.7561340332031,
+            370.1797180175781
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2635,
+          "bbox": [
+            0.0,
+            255.181396484375,
+            50.4122314453125,
+            346.43487548828125
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.20.03.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 8,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 29.25,
+      "yolo_min_conf_pct": 25.9,
+      "yolo_max_conf_pct": 39.96,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 137,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.15,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 24.9,
+      "gray_threshold": 127.0,
+      "scalp_gray_median": 156.0,
+      "hair_gray_median": 57.0,
+      "inference_ms": 816.3,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.20.03_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.3996,
+          "bbox": [
+            350.4267883300781,
+            243.27049255371094,
+            403.20751953125,
+            320.1334228515625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3303,
+          "bbox": [
+            230.71669006347656,
+            175.7651824951172,
+            290.10107421875,
+            258.47430419921875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2799,
+          "bbox": [
+            340.6334228515625,
+            392.3117980957031,
+            382.448486328125,
+            456.6976318359375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2783,
+          "bbox": [
+            401.591796875,
+            164.2744903564453,
+            447.041259765625,
+            228.28244018554688
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2682,
+          "bbox": [
+            456.72137451171875,
+            340.32733154296875,
+            515.2080688476562,
+            420.7218017578125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2628,
+          "bbox": [
+            407.50701904296875,
+            299.16876220703125,
+            453.9791564941406,
+            360.8339538574219
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2622,
+          "bbox": [
+            531.352783203125,
+            79.2925796508789,
+            592.7481079101562,
+            161.6510009765625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.259,
+          "bbox": [
+            403.7037048339844,
+            294.4447021484375,
+            460.21392822265625,
+            368.05804443359375
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.20.04.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 0,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": null,
+      "yolo_min_conf_pct": null,
+      "yolo_max_conf_pct": null,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 123,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.22,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 29.6,
+      "gray_threshold": 115.0,
+      "scalp_gray_median": 138.0,
+      "hair_gray_median": 50.0,
+      "inference_ms": 914.3,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.20.04_panel.png",
+      "detections": []
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.20.05.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 0,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": null,
+      "yolo_min_conf_pct": null,
+      "yolo_max_conf_pct": null,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 142,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 3.89,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 31.7,
+      "gray_threshold": 129.0,
+      "scalp_gray_median": 159.0,
+      "hair_gray_median": 61.0,
+      "inference_ms": 1172.1,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.20.05_panel.png",
+      "detections": []
+    }
+  ]
+}

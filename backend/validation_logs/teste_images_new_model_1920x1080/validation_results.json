@@ -1,0 +1,3584 @@
+{
+  "summary": {
+    "timestamp": "2026-11-26T19:26:00",
+    "input_dir": "C:\\Users\\arthu\\OneDrive\\Documents\\frontend_hair\\teste_images",
+    "output_dir": "C:\\Users\\arthu\\OneDrive\\Documents\\frontend_hair\\backend\\validation_logs\\teste_images_new_model_1920x1080",
+    "model_used": "C:\\Users\\arthu\\OneDrive\\Documents\\frontend_hair\\backend\\YOLO_MODEL\\best.pt",
+    "yolo_conf_threshold": 0.25,
+    "yolo_iou_threshold": 0.45,
+    "hair_gray_max_override": null,
+    "images_evaluated": 16,
+    "total_bulbs_detected": 308,
+    "avg_bulbs_per_image": 19.25,
+    "total_strands_detected": 2035,
+    "avg_strands_per_image": 127.19,
+    "avg_thickness_px": 4.27,
+    "avg_coverage_pct": 27.3,
+    "yolo_mean_confidence_pct": 72.71,
+    "avg_inference_ms": 1623.3,
+    "bulbs_accuracy": {
+      "evaluated_images": 0,
+      "count_accuracy_pct": null,
+      "mae": null,
+      "rmse": null,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null
+    },
+    "strands_accuracy": {
+      "evaluated_images": 0,
+      "count_accuracy_pct": null,
+      "mae": null,
+      "rmse": null
+    }
+  },
+  "images": [
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.43.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 20,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 77.87,
+      "yolo_min_conf_pct": 36.92,
+      "yolo_max_conf_pct": 93.96,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 133,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.3,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 27.2,
+      "gray_threshold": 125.0,
+      "scalp_gray_median": 151.0,
+      "hair_gray_median": 56.0,
+      "inference_ms": 1636.3,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.43_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.9396,
+          "bbox": [
+            209.68275451660156,
+            408.4981384277344,
+            239.51438903808594,
+            438.8097839355469
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9301,
+          "bbox": [
+            384.2648010253906,
+            111.46067810058594,
+            417.3620300292969,
+            140.24722290039062
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9292,
+          "bbox": [
+            64.04132843017578,
+            313.4587707519531,
+            97.65465545654297,
+            344.1594543457031
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9239,
+          "bbox": [
+            275.2569580078125,
+            198.79425048828125,
+            309.4378967285156,
+            227.10964965820312
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9233,
+          "bbox": [
+            451.5570373535156,
+            110.880615234375,
+            488.73370361328125,
+            139.6019287109375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9181,
+          "bbox": [
+            243.03736877441406,
+            341.3075256347656,
+            277.435791015625,
+            375.150634765625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9069,
+          "bbox": [
+            264.5193176269531,
+            281.6895751953125,
+            299.8089294433594,
+            314.35986328125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9057,
+          "bbox": [
+            334.6871643066406,
+            154.49945068359375,
+            366.30413818359375,
+            179.53086853027344
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9021,
+          "bbox": [
+            306.8526306152344,
+            117.28663635253906,
+            337.1618957519531,
+            143.7666015625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8967,
+          "bbox": [
+            172.78060913085938,
+            379.2908935546875,
+            204.2652130126953,
+            408.3388671875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8885,
+          "bbox": [
+            63.467796325683594,
+            383.0067443847656,
+            93.46965789794922,
+            413.61474609375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8429,
+          "bbox": [
+            432.4112243652344,
+            335.1794738769531,
+            467.24395751953125,
+            364.0992126464844
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.789,
+          "bbox": [
+            100.45555114746094,
+            328.27362060546875,
+            132.87899780273438,
+            358.1416320800781
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7767,
+          "bbox": [
+            211.70181274414062,
+            263.5357971191406,
+            248.016845703125,
+            294.1297912597656
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7493,
+          "bbox": [
+            146.62210083007812,
+            385.98504638671875,
+            184.32608032226562,
+            417.34808349609375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6501,
+          "bbox": [
+            314.3705749511719,
+            323.7757873535156,
+            350.6842041015625,
+            356.14617919921875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.489,
+          "bbox": [
+            447.2819519042969,
+            226.77822875976562,
+            483.6038818359375,
+            259.2160339355469
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4338,
+          "bbox": [
+            467.7879333496094,
+            40.28825759887695,
+            492.8917541503906,
+            61.48162078857422
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4101,
+          "bbox": [
+            314.5769958496094,
+            323.61090087890625,
+            351.1597900390625,
+            355.99566650390625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3692,
+          "bbox": [
+            229.35446166992188,
+            260.9356384277344,
+            265.5876159667969,
+            290.31103515625
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.44.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 7,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 70.18,
+      "yolo_min_conf_pct": 47.55,
+      "yolo_max_conf_pct": 89.15,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 102,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.57,
+      "median_thickness_px": 4.6,
+      "hair_coverage_pct": 19.0,
+      "gray_threshold": 108.0,
+      "scalp_gray_median": 123.0,
+      "hair_gray_median": 62.0,
+      "inference_ms": 843.2,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.44_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.8915,
+          "bbox": [
+            114.44403076171875,
+            107.15267181396484,
+            147.19546508789062,
+            136.80050659179688
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8803,
+          "bbox": [
+            154.30990600585938,
+            227.7277069091797,
+            190.92996215820312,
+            262.34027099609375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8425,
+          "bbox": [
+            195.6385040283203,
+            235.89903259277344,
+            232.61605834960938,
+            264.81488037109375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.722,
+          "bbox": [
+            102.29100799560547,
+            59.009971618652344,
+            131.77610778808594,
+            82.12814331054688
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5935,
+          "bbox": [
+            190.98878479003906,
+            309.12158203125,
+            225.22067260742188,
+            338.6145935058594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5073,
+          "bbox": [
+            114.90116119384766,
+            235.22467041015625,
+            156.9473114013672,
+            267.8894348144531
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4755,
+          "bbox": [
+            222.05809020996094,
+            385.391845703125,
+            263.8631286621094,
+            420.0191650390625
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.45.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 12,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 69.26,
+      "yolo_min_conf_pct": 32.83,
+      "yolo_max_conf_pct": 93.64,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 140,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.01,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 29.3,
+      "gray_threshold": 127.0,
+      "scalp_gray_median": 162.0,
+      "hair_gray_median": 65.0,
+      "inference_ms": 1967.2,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.45_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.9364,
+          "bbox": [
+            192.05044555664062,
+            227.1124267578125,
+            226.2228240966797,
+            258.56591796875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9068,
+          "bbox": [
+            365.7872009277344,
+            245.7107696533203,
+            400.6045227050781,
+            278.96661376953125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8855,
+          "bbox": [
+            185.36422729492188,
+            159.0315704345703,
+            217.34368896484375,
+            190.31338500976562
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8755,
+          "bbox": [
+            269.8139343261719,
+            176.05506896972656,
+            303.0574951171875,
+            208.81985473632812
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8736,
+          "bbox": [
+            122.03416442871094,
+            104.41893768310547,
+            153.27796936035156,
+            137.24192810058594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8129,
+          "bbox": [
+            255.63058471679688,
+            269.8108215332031,
+            279.93572998046875,
+            294.14703369140625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7898,
+          "bbox": [
+            140.31414794921875,
+            328.7840270996094,
+            172.41619873046875,
+            358.6776428222656
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7398,
+          "bbox": [
+            568.6170043945312,
+            42.87049865722656,
+            595.0863037109375,
+            66.05559539794922
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4061,
+          "bbox": [
+            279.4364013671875,
+            282.7176513671875,
+            309.9864807128906,
+            311.77606201171875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3836,
+          "bbox": [
+            299.9435729980469,
+            305.31121826171875,
+            330.83258056640625,
+            334.19439697265625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3734,
+          "bbox": [
+            193.2066650390625,
+            306.7703552246094,
+            220.96328735351562,
+            331.5155944824219
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3283,
+          "bbox": [
+            462.8813781738281,
+            316.72137451171875,
+            493.32861328125,
+            344.47369384765625
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.47.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 26,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 77.88,
+      "yolo_min_conf_pct": 35.64,
+      "yolo_max_conf_pct": 97.34,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 134,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.58,
+      "median_thickness_px": 4.6,
+      "hair_coverage_pct": 29.1,
+      "gray_threshold": 127.0,
+      "scalp_gray_median": 159.0,
+      "hair_gray_median": 53.0,
+      "inference_ms": 1650.5,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.47_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.9734,
+          "bbox": [
+            328.5710754394531,
+            245.15878295898438,
+            382.1612854003906,
+            289.1618957519531
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9432,
+          "bbox": [
+            249.94854736328125,
+            48.971534729003906,
+            282.382080078125,
+            78.29721069335938
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9421,
+          "bbox": [
+            309.6363220214844,
+            179.1192169189453,
+            343.1591491699219,
+            210.77415466308594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9336,
+          "bbox": [
+            314.5892639160156,
+            116.47016906738281,
+            347.8403015136719,
+            144.0802001953125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9299,
+          "bbox": [
+            492.2834777832031,
+            225.1946258544922,
+            530.3309326171875,
+            258.0357971191406
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9294,
+          "bbox": [
+            421.10223388671875,
+            128.84225463867188,
+            459.298583984375,
+            160.95364379882812
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9249,
+          "bbox": [
+            326.9406433105469,
+            370.53814697265625,
+            357.4312744140625,
+            398.110595703125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9104,
+          "bbox": [
+            511.6435241699219,
+            126.9530258178711,
+            546.6182861328125,
+            157.78883361816406
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9048,
+          "bbox": [
+            361.4176330566406,
+            405.61767578125,
+            394.94134521484375,
+            436.9532775878906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8929,
+          "bbox": [
+            352.08319091796875,
+            312.7065734863281,
+            385.9873046875,
+            344.6076354980469
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8608,
+          "bbox": [
+            409.578125,
+            343.2241516113281,
+            443.3526306152344,
+            376.1548156738281
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8594,
+          "bbox": [
+            238.98150634765625,
+            96.8605728149414,
+            267.2455139160156,
+            122.91229248046875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8555,
+          "bbox": [
+            208.15919494628906,
+            108.63267517089844,
+            237.1857452392578,
+            136.77098083496094
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8473,
+          "bbox": [
+            519.863525390625,
+            373.5112609863281,
+            552.3937377929688,
+            402.7008056640625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8159,
+          "bbox": [
+            503.8560485839844,
+            325.8044128417969,
+            544.0530395507812,
+            355.7564392089844
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8034,
+          "bbox": [
+            422.2376708984375,
+            396.0227355957031,
+            483.59844970703125,
+            448.3013000488281
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7499,
+          "bbox": [
+            457.4768981933594,
+            265.69146728515625,
+            492.90985107421875,
+            293.23333740234375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7367,
+          "bbox": [
+            400.44091796875,
+            52.01254653930664,
+            434.3548278808594,
+            82.12017822265625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.707,
+          "bbox": [
+            300.0722351074219,
+            441.9440612792969,
+            335.2742004394531,
+            472.06365966796875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6966,
+          "bbox": [
+            485.8450927734375,
+            35.742557525634766,
+            518.2957153320312,
+            64.18444061279297
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6504,
+          "bbox": [
+            222.3980712890625,
+            168.96469116210938,
+            257.6985778808594,
+            200.818359375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6219,
+          "bbox": [
+            283.2216491699219,
+            147.77171325683594,
+            306.74945068359375,
+            171.3179473876953
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5351,
+          "bbox": [
+            377.24615478515625,
+            196.28207397460938,
+            416.3527526855469,
+            227.578369140625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5013,
+          "bbox": [
+            222.46749877929688,
+            169.2849578857422,
+            258.5501708984375,
+            200.9308624267578
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3675,
+          "bbox": [
+            424.8442687988281,
+            273.1640625,
+            463.9127197265625,
+            299.5318298339844
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3564,
+          "bbox": [
+            552.4196166992188,
+            177.88861083984375,
+            578.6314086914062,
+            206.72134399414062
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.48.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 20,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 72.99,
+      "yolo_min_conf_pct": 27.76,
+      "yolo_max_conf_pct": 93.38,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 131,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.8,
+      "median_thickness_px": 5.0,
+      "hair_coverage_pct": 33.6,
+      "gray_threshold": 121.0,
+      "scalp_gray_median": 152.0,
+      "hair_gray_median": 52.0,
+      "inference_ms": 1735.2,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.48_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.9338,
+          "bbox": [
+            403.2243347167969,
+            133.97215270996094,
+            435.0072021484375,
+            159.82839965820312
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9325,
+          "bbox": [
+            328.17047119140625,
+            280.5577087402344,
+            362.718994140625,
+            315.1827697753906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9287,
+          "bbox": [
+            527.0227661132812,
+            298.81011962890625,
+            556.11279296875,
+            323.9440612792969
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9252,
+          "bbox": [
+            576.7167358398438,
+            280.2017822265625,
+            608.76416015625,
+            311.0569763183594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9178,
+          "bbox": [
+            263.8802185058594,
+            228.03848266601562,
+            298.3473205566406,
+            262.5885009765625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9059,
+          "bbox": [
+            364.5853271484375,
+            240.69927978515625,
+            394.4354248046875,
+            268.4335021972656
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8977,
+          "bbox": [
+            534.1576538085938,
+            406.8590393066406,
+            561.706298828125,
+            434.23797607421875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8827,
+          "bbox": [
+            175.5144500732422,
+            126.4941177368164,
+            207.11009216308594,
+            155.9647979736328
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8824,
+          "bbox": [
+            424.7998046875,
+            233.374755859375,
+            456.2252197265625,
+            264.3214416503906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8322,
+          "bbox": [
+            323.567626953125,
+            363.3481750488281,
+            352.01580810546875,
+            388.2998046875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7794,
+          "bbox": [
+            155.50765991210938,
+            62.36758041381836,
+            190.6678924560547,
+            91.9864273071289
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7788,
+          "bbox": [
+            203.92330932617188,
+            297.57965087890625,
+            226.892578125,
+            318.729736328125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7618,
+          "bbox": [
+            345.7780456542969,
+            334.7195739746094,
+            372.722412109375,
+            363.5384216308594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6175,
+          "bbox": [
+            207.02059936523438,
+            336.0821533203125,
+            243.09042358398438,
+            368.2649230957031
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.591,
+          "bbox": [
+            532.1176147460938,
+            338.2177734375,
+            561.7852783203125,
+            368.2726135253906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5562,
+          "bbox": [
+            346.5394592285156,
+            334.50714111328125,
+            374.0299377441406,
+            363.58831787109375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4158,
+          "bbox": [
+            82.75083923339844,
+            40.49029541015625,
+            110.8423843383789,
+            64.65007781982422
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3956,
+          "bbox": [
+            284.96697998046875,
+            307.0306091308594,
+            310.6953430175781,
+            330.6620788574219
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3847,
+          "bbox": [
+            285.1221923828125,
+            306.67218017578125,
+            310.88836669921875,
+            330.59234619140625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2776,
+          "bbox": [
+            280.5289001464844,
+            394.38720703125,
+            308.0281677246094,
+            419.3082580566406
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.49.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 15,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 76.93,
+      "yolo_min_conf_pct": 26.08,
+      "yolo_max_conf_pct": 93.86,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 113,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.01,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 20.6,
+      "gray_threshold": 126.0,
+      "scalp_gray_median": 145.0,
+      "hair_gray_median": 60.0,
+      "inference_ms": 1077.3,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.49_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.9386,
+          "bbox": [
+            271.9857482910156,
+            318.82269287109375,
+            309.4070739746094,
+            347.7158203125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9144,
+          "bbox": [
+            11.364989280700684,
+            157.40309143066406,
+            43.355220794677734,
+            190.36798095703125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9131,
+          "bbox": [
+            98.6288833618164,
+            179.1643829345703,
+            133.69190979003906,
+            209.29566955566406
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9131,
+          "bbox": [
+            70.46659851074219,
+            125.79261016845703,
+            102.32437133789062,
+            155.97886657714844
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.904,
+          "bbox": [
+            164.67816162109375,
+            332.3038635253906,
+            198.0358123779297,
+            364.6880187988281
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8957,
+          "bbox": [
+            75.7781753540039,
+            245.3660125732422,
+            112.46910095214844,
+            283.971923828125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8764,
+          "bbox": [
+            51.7529182434082,
+            278.13201904296875,
+            79.21095275878906,
+            305.23907470703125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8753,
+          "bbox": [
+            215.2680206298828,
+            20.98781394958496,
+            245.3257293701172,
+            49.6489143371582
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7868,
+          "bbox": [
+            271.75970458984375,
+            426.8288879394531,
+            306.3685302734375,
+            460.3342590332031
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7487,
+          "bbox": [
+            43.746917724609375,
+            67.62139892578125,
+            69.24427795410156,
+            94.18524169921875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6803,
+          "bbox": [
+            209.89442443847656,
+            216.1295166015625,
+            247.2490997314453,
+            247.73948669433594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6626,
+          "bbox": [
+            152.53842163085938,
+            251.2275390625,
+            188.8234100341797,
+            280.3658752441406
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5987,
+          "bbox": [
+            196.98997497558594,
+            397.5654296875,
+            228.62147521972656,
+            429.86383056640625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5716,
+          "bbox": [
+            176.45602416992188,
+            154.11251831054688,
+            209.4595184326172,
+            185.79483032226562
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2608,
+          "bbox": [
+            100.01898956298828,
+            0.0,
+            124.00322723388672,
+            8.46354866027832
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.51.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 18,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 73.83,
+      "yolo_min_conf_pct": 33.23,
+      "yolo_max_conf_pct": 92.81,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 122,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.51,
+      "median_thickness_px": 4.6,
+      "hair_coverage_pct": 29.1,
+      "gray_threshold": 133.0,
+      "scalp_gray_median": 170.0,
+      "hair_gray_median": 61.0,
+      "inference_ms": 1633.0,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.51_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.9281,
+          "bbox": [
+            262.339599609375,
+            305.2758483886719,
+            294.7662658691406,
+            335.1043701171875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9255,
+          "bbox": [
+            231.072265625,
+            242.1167755126953,
+            262.89532470703125,
+            270.6226806640625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9202,
+          "bbox": [
+            346.730712890625,
+            253.46543884277344,
+            381.4548034667969,
+            286.39984130859375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9073,
+          "bbox": [
+            93.75980377197266,
+            110.24794006347656,
+            123.13289642333984,
+            138.91590881347656
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8986,
+          "bbox": [
+            426.6592712402344,
+            398.80572509765625,
+            457.5365295410156,
+            425.2023620605469
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8463,
+          "bbox": [
+            345.2606201171875,
+            313.15966796875,
+            378.2386474609375,
+            343.4095153808594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8461,
+          "bbox": [
+            114.62662506103516,
+            286.7418212890625,
+            148.09019470214844,
+            318.2894287109375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8347,
+          "bbox": [
+            292.26446533203125,
+            390.92626953125,
+            323.2297668457031,
+            418.4944152832031
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8144,
+          "bbox": [
+            533.3038330078125,
+            401.8124084472656,
+            559.2130737304688,
+            426.3020935058594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7798,
+          "bbox": [
+            296.4349670410156,
+            211.8341064453125,
+            335.9914855957031,
+            243.66407775878906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.717,
+          "bbox": [
+            216.04302978515625,
+            282.0007019042969,
+            242.89926147460938,
+            311.99169921875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6799,
+          "bbox": [
+            228.55906677246094,
+            398.0987854003906,
+            259.1142883300781,
+            427.8406066894531
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6512,
+          "bbox": [
+            60.51044845581055,
+            36.74143981933594,
+            93.38531494140625,
+            67.0521469116211
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6398,
+          "bbox": [
+            137.6268310546875,
+            186.27317810058594,
+            171.04681396484375,
+            217.33567810058594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5863,
+          "bbox": [
+            69.09440612792969,
+            337.47412109375,
+            96.24872589111328,
+            362.2986145019531
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5607,
+          "bbox": [
+            365.9415283203125,
+            374.8712463378906,
+            401.98687744140625,
+            408.4610900878906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4217,
+          "bbox": [
+            191.89666748046875,
+            115.68921661376953,
+            224.4791259765625,
+            148.2355499267578
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3323,
+          "bbox": [
+            73.02000427246094,
+            158.4988250732422,
+            97.27386474609375,
+            181.94168090820312
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.53.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 19,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 66.55,
+      "yolo_min_conf_pct": 32.2,
+      "yolo_max_conf_pct": 94.66,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 133,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.17,
+      "median_thickness_px": 4.6,
+      "hair_coverage_pct": 26.1,
+      "gray_threshold": 124.0,
+      "scalp_gray_median": 154.0,
+      "hair_gray_median": 49.0,
+      "inference_ms": 1749.5,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.53_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.9466,
+          "bbox": [
+            144.03823852539062,
+            243.85256958007812,
+            179.03118896484375,
+            277.12591552734375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9268,
+          "bbox": [
+            204.73646545410156,
+            292.38531494140625,
+            237.21299743652344,
+            320.4123840332031
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9254,
+          "bbox": [
+            223.42144775390625,
+            363.3139343261719,
+            256.25714111328125,
+            398.6025085449219
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8906,
+          "bbox": [
+            10.630255699157715,
+            126.72576141357422,
+            36.93630599975586,
+            158.4580535888672
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8674,
+          "bbox": [
+            123.92967224121094,
+            389.79522705078125,
+            153.7749786376953,
+            419.9933166503906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8248,
+          "bbox": [
+            86.34915924072266,
+            457.4701232910156,
+            115.49498748779297,
+            480.0
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8121,
+          "bbox": [
+            66.25739288330078,
+            86.40254211425781,
+            98.39822387695312,
+            116.36917114257812
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7923,
+          "bbox": [
+            175.85794067382812,
+            397.8013000488281,
+            212.15138244628906,
+            431.3319396972656
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7917,
+          "bbox": [
+            95.6919937133789,
+            204.61227416992188,
+            129.7037353515625,
+            236.01864624023438
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7619,
+          "bbox": [
+            125.00323486328125,
+            444.3721008300781,
+            156.3123016357422,
+            478.6662902832031
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6986,
+          "bbox": [
+            151.67800903320312,
+            432.62213134765625,
+            183.2466278076172,
+            465.1749267578125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5932,
+          "bbox": [
+            35.83723449707031,
+            55.85316467285156,
+            64.39771270751953,
+            84.5430908203125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.522,
+          "bbox": [
+            333.02593994140625,
+            235.92544555664062,
+            362.82586669921875,
+            262.1072998046875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4656,
+          "bbox": [
+            299.0090637207031,
+            86.24333953857422,
+            327.3067932128906,
+            113.72525787353516
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4203,
+          "bbox": [
+            105.50760650634766,
+            133.7052764892578,
+            140.20970153808594,
+            164.67884826660156
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4126,
+          "bbox": [
+            292.7634582519531,
+            345.5849304199219,
+            320.1211853027344,
+            371.83905029296875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3475,
+          "bbox": [
+            366.3138427734375,
+            391.73236083984375,
+            396.1877746582031,
+            419.0916748046875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3226,
+          "bbox": [
+            63.73972702026367,
+            163.1377716064453,
+            90.01742553710938,
+            190.7056884765625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.322,
+          "bbox": [
+            160.92010498046875,
+            339.5989990234375,
+            192.5202178955078,
+            372.6314392089844
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.54.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 20,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 73.57,
+      "yolo_min_conf_pct": 31.75,
+      "yolo_max_conf_pct": 94.6,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 112,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.05,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 22.4,
+      "gray_threshold": 127.0,
+      "scalp_gray_median": 151.0,
+      "hair_gray_median": 52.0,
+      "inference_ms": 1326.9,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.54_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.946,
+          "bbox": [
+            159.63758850097656,
+            390.93682861328125,
+            196.54605102539062,
+            425.15399169921875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9393,
+          "bbox": [
+            281.0501708984375,
+            345.566650390625,
+            305.1798095703125,
+            369.3865966796875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9272,
+          "bbox": [
+            135.0352020263672,
+            236.35092163085938,
+            167.96475219726562,
+            268.3740539550781
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9196,
+          "bbox": [
+            87.53814697265625,
+            186.21295166015625,
+            123.48092651367188,
+            219.956298828125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9156,
+          "bbox": [
+            82.61468505859375,
+            111.31671142578125,
+            118.74081420898438,
+            140.63082885742188
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9029,
+          "bbox": [
+            65.49868774414062,
+            448.4217834472656,
+            92.78510284423828,
+            472.8011169433594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9003,
+          "bbox": [
+            351.7651062011719,
+            392.8167724609375,
+            382.5067138671875,
+            420.57965087890625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.843,
+          "bbox": [
+            104.44027709960938,
+            437.05712890625,
+            135.18377685546875,
+            469.31121826171875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8217,
+          "bbox": [
+            3.3899502754211426,
+            101.39898681640625,
+            30.96793556213379,
+            130.45394897460938
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7985,
+          "bbox": [
+            206.19728088378906,
+            358.5287780761719,
+            246.7769775390625,
+            399.3600158691406
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7347,
+          "bbox": [
+            147.5226287841797,
+            327.5237121582031,
+            182.13900756835938,
+            361.0439758300781
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7176,
+          "bbox": [
+            240.81069946289062,
+            446.6156921386719,
+            275.1936340332031,
+            479.05291748046875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7058,
+          "bbox": [
+            33.62055969238281,
+            266.1019592285156,
+            60.26266860961914,
+            294.4794921875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6645,
+          "bbox": [
+            107.81209564208984,
+            381.3163757324219,
+            135.92898559570312,
+            412.10650634765625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6476,
+          "bbox": [
+            92.70067596435547,
+            349.599609375,
+            125.85282135009766,
+            382.70037841796875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6011,
+          "bbox": [
+            97.0110855102539,
+            266.8016357421875,
+            126.5018310546875,
+            297.57025146484375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5849,
+          "bbox": [
+            306.41265869140625,
+            80.761474609375,
+            335.3913269042969,
+            110.59061431884766
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4831,
+          "bbox": [
+            149.55812072753906,
+            151.85504150390625,
+            177.67701721191406,
+            181.63623046875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3426,
+          "bbox": [
+            492.118896484375,
+            389.4564514160156,
+            523.1168212890625,
+            421.4541320800781
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3175,
+          "bbox": [
+            22.84276008605957,
+            446.7115783691406,
+            51.78429412841797,
+            473.32867431640625
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.56.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 13,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 73.74,
+      "yolo_min_conf_pct": 27.4,
+      "yolo_max_conf_pct": 94.83,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 120,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.16,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 26.2,
+      "gray_threshold": 122.0,
+      "scalp_gray_median": 150.0,
+      "hair_gray_median": 51.0,
+      "inference_ms": 1435.9,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.56_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.9483,
+          "bbox": [
+            324.187255859375,
+            288.469970703125,
+            360.0089416503906,
+            318.8173828125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9434,
+          "bbox": [
+            492.1195983886719,
+            404.9263000488281,
+            524.4024047851562,
+            440.5881652832031
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9357,
+          "bbox": [
+            456.0118408203125,
+            292.464111328125,
+            489.17462158203125,
+            321.8436279296875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9291,
+          "bbox": [
+            388.81781005859375,
+            296.265380859375,
+            423.4587707519531,
+            328.50408935546875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.853,
+          "bbox": [
+            216.05441284179688,
+            247.33058166503906,
+            245.0194549560547,
+            275.52532958984375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8522,
+          "bbox": [
+            292.01336669921875,
+            343.2464599609375,
+            327.9128723144531,
+            373.2289733886719
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7775,
+          "bbox": [
+            435.4227600097656,
+            350.2854919433594,
+            474.2378234863281,
+            386.73236083984375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7301,
+          "bbox": [
+            204.99021911621094,
+            184.12290954589844,
+            242.21450805664062,
+            221.05067443847656
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6995,
+          "bbox": [
+            297.78369140625,
+            398.1195373535156,
+            341.0638427734375,
+            430.3962707519531
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6697,
+          "bbox": [
+            240.410400390625,
+            341.776123046875,
+            269.4277038574219,
+            363.8895263671875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5534,
+          "bbox": [
+            163.45774841308594,
+            84.61972045898438,
+            195.29806518554688,
+            110.80551147460938
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4197,
+          "bbox": [
+            171.50076293945312,
+            328.0223693847656,
+            200.79916381835938,
+            352.6874084472656
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.274,
+          "bbox": [
+            270.7484436035156,
+            223.19482421875,
+            312.8619384765625,
+            259.09710693359375
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.19.57.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 12,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 83.13,
+      "yolo_min_conf_pct": 62.71,
+      "yolo_max_conf_pct": 92.92,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 121,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.37,
+      "median_thickness_px": 4.6,
+      "hair_coverage_pct": 28.6,
+      "gray_threshold": 126.0,
+      "scalp_gray_median": 160.0,
+      "hair_gray_median": 51.0,
+      "inference_ms": 1639.9,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.19.57_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.9292,
+          "bbox": [
+            356.36956787109375,
+            348.5193176269531,
+            390.532470703125,
+            378.0210876464844
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9285,
+          "bbox": [
+            412.801513671875,
+            389.2229919433594,
+            446.8952331542969,
+            418.7265319824219
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9229,
+          "bbox": [
+            454.1712951660156,
+            436.1087341308594,
+            488.04559326171875,
+            470.119140625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9203,
+          "bbox": [
+            335.2577819824219,
+            215.1216278076172,
+            368.3243408203125,
+            244.24212646484375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9161,
+          "bbox": [
+            269.6100769042969,
+            199.8584442138672,
+            303.62799072265625,
+            226.83316040039062
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8984,
+          "bbox": [
+            236.72349548339844,
+            307.75677490234375,
+            272.9087219238281,
+            334.5434265136719
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8911,
+          "bbox": [
+            281.1395263671875,
+            344.5020446777344,
+            316.1416320800781,
+            375.6175842285156
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8448,
+          "bbox": [
+            134.4646453857422,
+            18.383203506469727,
+            163.87954711914062,
+            43.85735321044922
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8001,
+          "bbox": [
+            49.85170364379883,
+            33.89779281616211,
+            82.53317260742188,
+            55.925662994384766
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6563,
+          "bbox": [
+            162.43270874023438,
+            142.32107543945312,
+            194.95538330078125,
+            171.5910186767578
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6406,
+          "bbox": [
+            353.87567138671875,
+            273.4461669921875,
+            387.4176330566406,
+            302.1132507324219
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6271,
+          "bbox": [
+            268.69940185546875,
+            42.24069595336914,
+            300.26617431640625,
+            71.61210632324219
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.20.00.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 18,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 61.14,
+      "yolo_min_conf_pct": 30.6,
+      "yolo_max_conf_pct": 92.06,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 143,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.29,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 31.8,
+      "gray_threshold": 121.0,
+      "scalp_gray_median": 151.0,
+      "hair_gray_median": 56.0,
+      "inference_ms": 1803.5,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.20.00_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.9206,
+          "bbox": [
+            348.6910095214844,
+            176.8770294189453,
+            382.7386779785156,
+            202.56849670410156
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9011,
+          "bbox": [
+            481.3121032714844,
+            138.4373779296875,
+            513.1111450195312,
+            163.0330810546875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8722,
+          "bbox": [
+            308.1761474609375,
+            46.96573257446289,
+            332.43121337890625,
+            67.1170883178711
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8641,
+          "bbox": [
+            349.276123046875,
+            253.26014709472656,
+            374.5130920410156,
+            275.6082458496094
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.781,
+          "bbox": [
+            175.26751708984375,
+            341.7057189941406,
+            198.46075439453125,
+            362.59808349609375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7155,
+          "bbox": [
+            562.1239013671875,
+            337.4482116699219,
+            582.6473999023438,
+            359.233154296875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6856,
+          "bbox": [
+            405.4803771972656,
+            328.3905029296875,
+            431.2463073730469,
+            351.075927734375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6768,
+          "bbox": [
+            540.6031494140625,
+            370.7073059082031,
+            566.162109375,
+            394.4897766113281
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6743,
+          "bbox": [
+            134.1313018798828,
+            314.9063415527344,
+            157.5001983642578,
+            337.73675537109375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6183,
+          "bbox": [
+            472.2249755859375,
+            237.96400451660156,
+            498.3606872558594,
+            263.5366516113281
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.604,
+          "bbox": [
+            70.89946746826172,
+            122.41012573242188,
+            94.66267395019531,
+            145.9362030029297
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5536,
+          "bbox": [
+            313.8729553222656,
+            295.9315185546875,
+            337.3717041015625,
+            319.027587890625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4439,
+          "bbox": [
+            520.8866577148438,
+            204.2333526611328,
+            553.931884765625,
+            230.3957977294922
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4106,
+          "bbox": [
+            97.05966186523438,
+            371.4515075683594,
+            124.40502166748047,
+            397.5914306640625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3482,
+          "bbox": [
+            24.481006622314453,
+            207.97537231445312,
+            48.7578239440918,
+            229.49583435058594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3199,
+          "bbox": [
+            521.9548950195312,
+            249.95872497558594,
+            557.5498046875,
+            282.9976501464844
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3095,
+          "bbox": [
+            145.82574462890625,
+            400.2204895019531,
+            172.31427001953125,
+            424.5981140136719
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.306,
+          "bbox": [
+            433.13909912109375,
+            297.15484619140625,
+            457.4246520996094,
+            318.6645202636719
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.20.02.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 31,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 63.72,
+      "yolo_min_conf_pct": 26.42,
+      "yolo_max_conf_pct": 95.23,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 125,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.22,
+      "median_thickness_px": 4.6,
+      "hair_coverage_pct": 28.0,
+      "gray_threshold": 127.0,
+      "scalp_gray_median": 159.0,
+      "hair_gray_median": 51.0,
+      "inference_ms": 1888.3,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.20.02_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.9523,
+          "bbox": [
+            451.44921875,
+            281.2381591796875,
+            481.9267578125,
+            309.2013244628906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9337,
+          "bbox": [
+            389.1861877441406,
+            322.0931396484375,
+            415.8930969238281,
+            352.1497497558594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9292,
+          "bbox": [
+            490.6079406738281,
+            297.8979797363281,
+            522.607421875,
+            334.5899963378906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9186,
+          "bbox": [
+            213.49053955078125,
+            384.9607849121094,
+            236.83499145507812,
+            413.2347106933594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.906,
+          "bbox": [
+            316.7614440917969,
+            257.44232177734375,
+            347.36798095703125,
+            282.2491760253906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.902,
+          "bbox": [
+            88.0710220336914,
+            5.550526142120361,
+            112.524169921875,
+            27.23453712463379
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8756,
+          "bbox": [
+            417.6996154785156,
+            251.9583282470703,
+            446.4901428222656,
+            282.6816711425781
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.862,
+          "bbox": [
+            126.14334106445312,
+            151.7886199951172,
+            154.03445434570312,
+            180.06869506835938
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8558,
+          "bbox": [
+            185.79913330078125,
+            304.6512451171875,
+            213.05096435546875,
+            332.9565734863281
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7906,
+          "bbox": [
+            297.0231018066406,
+            283.7859191894531,
+            325.8971862792969,
+            310.741455078125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7681,
+          "bbox": [
+            260.5104675292969,
+            184.63986206054688,
+            295.0731201171875,
+            217.47036743164062
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7627,
+          "bbox": [
+            576.3833618164062,
+            276.92901611328125,
+            602.483154296875,
+            305.14141845703125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7473,
+          "bbox": [
+            469.3267822265625,
+            383.48638916015625,
+            490.23895263671875,
+            408.5063781738281
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7351,
+          "bbox": [
+            145.15017700195312,
+            387.2609558105469,
+            176.2610626220703,
+            417.32122802734375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7205,
+          "bbox": [
+            327.1873779296875,
+            371.620849609375,
+            353.20123291015625,
+            396.67144775390625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.695,
+          "bbox": [
+            88.9903335571289,
+            219.87501525878906,
+            114.9263916015625,
+            247.53102111816406
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6882,
+          "bbox": [
+            70.6172866821289,
+            250.26034545898438,
+            94.20361328125,
+            275.4685363769531
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5866,
+          "bbox": [
+            515.85888671875,
+            224.35879516601562,
+            541.3350830078125,
+            251.12942504882812
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5634,
+          "bbox": [
+            163.83877563476562,
+            229.00828552246094,
+            189.8759002685547,
+            253.55892944335938
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5537,
+          "bbox": [
+            576.1233520507812,
+            263.8369140625,
+            604.8408813476562,
+            302.3366394042969
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4983,
+          "bbox": [
+            501.76751708984375,
+            436.35687255859375,
+            529.191650390625,
+            470.02166748046875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.451,
+          "bbox": [
+            579.4658813476562,
+            329.7737731933594,
+            609.5255737304688,
+            369.92596435546875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4498,
+          "bbox": [
+            553.1602783203125,
+            155.27867126464844,
+            579.2634887695312,
+            182.84530639648438
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.439,
+          "bbox": [
+            363.9008483886719,
+            459.9886779785156,
+            401.27703857421875,
+            479.9478759765625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4019,
+          "bbox": [
+            101.9267578125,
+            248.32225036621094,
+            127.11111450195312,
+            273.9914245605469
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3658,
+          "bbox": [
+            100.51133728027344,
+            247.1073455810547,
+            126.29044342041016,
+            273.442626953125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2995,
+          "bbox": [
+            452.1018981933594,
+            463.8989562988281,
+            476.7605895996094,
+            480.0
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2846,
+          "bbox": [
+            23.873382568359375,
+            380.8554992675781,
+            50.47148513793945,
+            410.8501892089844
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2798,
+          "bbox": [
+            469.4065856933594,
+            382.8958435058594,
+            490.5860290527344,
+            408.3722839355469
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2734,
+          "bbox": [
+            425.8448486328125,
+            359.7673034667969,
+            455.1795654296875,
+            394.0064697265625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2642,
+          "bbox": [
+            217.45578002929688,
+            337.4264221191406,
+            245.43670654296875,
+            367.5617370605469
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.20.03.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 35,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 78.75,
+      "yolo_min_conf_pct": 33.9,
+      "yolo_max_conf_pct": 95.48,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 137,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.16,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 25.0,
+      "gray_threshold": 127.0,
+      "scalp_gray_median": 156.0,
+      "hair_gray_median": 57.0,
+      "inference_ms": 1767.8,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.20.03_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.9548,
+          "bbox": [
+            229.11273193359375,
+            331.1964111328125,
+            249.86192321777344,
+            355.2699890136719
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9381,
+          "bbox": [
+            542.1032104492188,
+            367.2571716308594,
+            564.930908203125,
+            390.0962219238281
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9365,
+          "bbox": [
+            206.35256958007812,
+            422.4672546386719,
+            227.8470001220703,
+            447.77618408203125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9358,
+          "bbox": [
+            454.7762145996094,
+            214.34873962402344,
+            487.4161071777344,
+            248.4827117919922
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9349,
+          "bbox": [
+            390.57452392578125,
+            225.5754852294922,
+            422.4628601074219,
+            256.000732421875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9281,
+          "bbox": [
+            418.1893615722656,
+            316.51165771484375,
+            454.03424072265625,
+            346.3443908691406
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9186,
+          "bbox": [
+            43.370208740234375,
+            247.01727294921875,
+            68.94037628173828,
+            277.357421875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9138,
+          "bbox": [
+            567.83447265625,
+            440.1424255371094,
+            596.9993286132812,
+            473.65948486328125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9111,
+          "bbox": [
+            393.06976318359375,
+            369.95867919921875,
+            426.4549255371094,
+            403.72662353515625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9059,
+          "bbox": [
+            473.5616455078125,
+            367.3983459472656,
+            507.9453430175781,
+            401.7355041503906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.904,
+          "bbox": [
+            405.6109924316406,
+            180.38565063476562,
+            437.5296630859375,
+            207.1761474609375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8934,
+          "bbox": [
+            271.3249816894531,
+            75.31703186035156,
+            296.1982421875,
+            104.81655883789062
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8865,
+          "bbox": [
+            363.3409118652344,
+            271.4944763183594,
+            395.9062805175781,
+            302.5262451171875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8749,
+          "bbox": [
+            295.6946105957031,
+            279.6837463378906,
+            325.2724304199219,
+            308.3119812011719
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8747,
+          "bbox": [
+            15.763543128967285,
+            217.19325256347656,
+            44.13604736328125,
+            246.32107543945312
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8574,
+          "bbox": [
+            349.2731628417969,
+            413.80609130859375,
+            370.8952331542969,
+            438.7950744628906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8523,
+          "bbox": [
+            115.1160659790039,
+            322.9808349609375,
+            139.2810821533203,
+            347.7549743652344
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8523,
+          "bbox": [
+            282.93157958984375,
+            450.6520080566406,
+            309.5453796386719,
+            478.3870544433594
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8445,
+          "bbox": [
+            97.05416870117188,
+            233.482177734375,
+            127.56341552734375,
+            265.7480773925781
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8373,
+          "bbox": [
+            14.870325088500977,
+            332.0838623046875,
+            44.748619079589844,
+            362.6890563964844
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8179,
+          "bbox": [
+            448.5733947753906,
+            258.96148681640625,
+            477.4143371582031,
+            294.6451416015625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8134,
+          "bbox": [
+            193.33953857421875,
+            152.52354431152344,
+            220.4848175048828,
+            179.64747619628906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7751,
+          "bbox": [
+            583.931884765625,
+            342.3487548828125,
+            610.4673461914062,
+            369.2323303222656
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7726,
+          "bbox": [
+            244.72193908691406,
+            207.03872680664062,
+            278.9672546386719,
+            240.61019897460938
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7717,
+          "bbox": [
+            58.61173629760742,
+            402.1783447265625,
+            85.37994384765625,
+            430.4996337890625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7237,
+          "bbox": [
+            594.41796875,
+            200.32899475097656,
+            619.6231689453125,
+            227.87879943847656
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.715,
+          "bbox": [
+            56.20771026611328,
+            59.56322479248047,
+            81.57390594482422,
+            86.88776397705078
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6973,
+          "bbox": [
+            162.10430908203125,
+            219.7311553955078,
+            195.3734893798828,
+            251.9766082763672
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.691,
+          "bbox": [
+            183.7332000732422,
+            310.6220397949219,
+            209.10731506347656,
+            337.22491455078125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.672,
+          "bbox": [
+            54.43208694458008,
+            392.79986572265625,
+            86.55602264404297,
+            430.197509765625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5159,
+          "bbox": [
+            206.24832153320312,
+            422.4425354003906,
+            227.93275451660156,
+            447.74017333984375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5067,
+          "bbox": [
+            251.00914001464844,
+            382.2460021972656,
+            274.1422119140625,
+            406.8172302246094
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4447,
+          "bbox": [
+            147.43516540527344,
+            457.0667419433594,
+            174.50656127929688,
+            480.0
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3525,
+          "bbox": [
+            153.71324157714844,
+            354.3757019042969,
+            181.4739532470703,
+            385.8553161621094
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.339,
+          "bbox": [
+            249.3943634033203,
+            309.8786926269531,
+            276.32073974609375,
+            338.03814697265625
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.20.04.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 21,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 74.67,
+      "yolo_min_conf_pct": 27.98,
+      "yolo_max_conf_pct": 93.96,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 126,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 4.26,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 29.6,
+      "gray_threshold": 115.0,
+      "scalp_gray_median": 138.0,
+      "hair_gray_median": 50.0,
+      "inference_ms": 1683.9,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.20.04_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.9396,
+          "bbox": [
+            497.85772705078125,
+            395.5036926269531,
+            527.5917358398438,
+            425.4527893066406
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9292,
+          "bbox": [
+            526.4454345703125,
+            367.6481018066406,
+            559.83740234375,
+            397.1492004394531
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9286,
+          "bbox": [
+            461.40069580078125,
+            90.71073150634766,
+            487.2154235839844,
+            120.08283233642578
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9238,
+          "bbox": [
+            166.492431640625,
+            133.5419921875,
+            198.6791229248047,
+            158.41452026367188
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9225,
+          "bbox": [
+            352.4702453613281,
+            279.134765625,
+            385.74798583984375,
+            308.3988952636719
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9198,
+          "bbox": [
+            494.62457275390625,
+            294.9185791015625,
+            526.0331420898438,
+            321.6084899902344
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9183,
+          "bbox": [
+            267.7740783691406,
+            186.6375274658203,
+            302.77862548828125,
+            213.91311645507812
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9002,
+          "bbox": [
+            371.0253601074219,
+            379.3487854003906,
+            399.2275085449219,
+            403.2052917480469
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8828,
+          "bbox": [
+            310.4469909667969,
+            274.38189697265625,
+            334.5648193359375,
+            296.47991943359375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8718,
+          "bbox": [
+            134.06874084472656,
+            236.6909637451172,
+            164.9544219970703,
+            265.24249267578125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8664,
+          "bbox": [
+            434.7477111816406,
+            412.80902099609375,
+            463.5442199707031,
+            437.4769592285156
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7869,
+          "bbox": [
+            312.229736328125,
+            231.10244750976562,
+            344.0696105957031,
+            257.0900573730469
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7785,
+          "bbox": [
+            566.1229858398438,
+            421.23956298828125,
+            600.3501586914062,
+            452.20318603515625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7741,
+          "bbox": [
+            389.231201171875,
+            193.64114379882812,
+            417.34356689453125,
+            219.73068237304688
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7026,
+          "bbox": [
+            438.09271240234375,
+            355.8187561035156,
+            471.8315734863281,
+            390.05145263671875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6831,
+          "bbox": [
+            482.0495910644531,
+            328.93670654296875,
+            516.4599609375,
+            357.80035400390625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5924,
+          "bbox": [
+            257.7431945800781,
+            434.5458679199219,
+            287.59698486328125,
+            458.9303894042969
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4444,
+          "bbox": [
+            393.22601318359375,
+            323.6507873535156,
+            425.2565612792969,
+            353.26202392578125
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3447,
+          "bbox": [
+            120.23313903808594,
+            268.8587341308594,
+            145.80426025390625,
+            291.618896484375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2918,
+          "bbox": [
+            523.37451171875,
+            451.3161315917969,
+            548.7105712890625,
+            473.2314147949219
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.2798,
+          "bbox": [
+            327.80877685546875,
+            150.56436157226562,
+            356.4302673339844,
+            175.1314697265625
+          ]
+        }
+      ]
+    },
+    {
+      "image": "WhatsApp Image 2026-11-25 at 22.20.05.jpeg",
+      "resolution": "640x480",
+      "bulb_count": 21,
+      "expected_bulbs": null,
+      "bulb_accuracy_pct": null,
+      "yolo_avg_conf_pct": 69.31,
+      "yolo_min_conf_pct": 37.57,
+      "yolo_max_conf_pct": 94.35,
+      "bbox_tp": null,
+      "bbox_fp": null,
+      "bbox_fn": null,
+      "bbox_precision_pct": null,
+      "bbox_recall_pct": null,
+      "bbox_f1_pct": null,
+      "strand_count": 143,
+      "expected_strands": null,
+      "strand_accuracy_pct": null,
+      "avg_thickness_px": 3.91,
+      "median_thickness_px": 3.39,
+      "hair_coverage_pct": 31.8,
+      "gray_threshold": 129.0,
+      "scalp_gray_median": 159.0,
+      "hair_gray_median": 61.0,
+      "inference_ms": 2134.9,
+      "visual_panel": "visuals/WhatsApp Image 2026-11-25 at 22.20.05_panel.png",
+      "detections": [
+        {
+          "class": "follicles",
+          "confidence": 0.9435,
+          "bbox": [
+            187.35037231445312,
+            60.11408996582031,
+            209.6672821044922,
+            79.78022766113281
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9315,
+          "bbox": [
+            59.98005294799805,
+            153.57093811035156,
+            78.66404724121094,
+            173.30178833007812
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9266,
+          "bbox": [
+            93.82014465332031,
+            158.21437072753906,
+            118.44060516357422,
+            182.1197509765625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.9245,
+          "bbox": [
+            233.3751983642578,
+            286.0310363769531,
+            257.6036071777344,
+            309.9881591796875
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8959,
+          "bbox": [
+            464.73956298828125,
+            229.16648864746094,
+            490.850341796875,
+            253.98056030273438
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.867,
+          "bbox": [
+            145.2288360595703,
+            140.38719177246094,
+            171.06785583496094,
+            164.79595947265625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8597,
+          "bbox": [
+            462.5215759277344,
+            50.356285095214844,
+            491.2672424316406,
+            78.80760955810547
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8316,
+          "bbox": [
+            551.4276733398438,
+            352.59014892578125,
+            573.2438354492188,
+            376.3591003417969
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8194,
+          "bbox": [
+            443.5830383300781,
+            99.24353790283203,
+            468.05419921875,
+            126.22933197021484
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.8151,
+          "bbox": [
+            523.339599609375,
+            94.53681945800781,
+            554.1935424804688,
+            119.62026977539062
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7352,
+          "bbox": [
+            344.7127990722656,
+            85.36743927001953,
+            371.5218200683594,
+            106.44307708740234
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.7298,
+          "bbox": [
+            81.54226684570312,
+            394.09423828125,
+            106.15177154541016,
+            423.86126708984375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.6927,
+          "bbox": [
+            229.0924835205078,
+            98.65696716308594,
+            255.1360321044922,
+            120.5186996459961
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5474,
+          "bbox": [
+            433.6861572265625,
+            9.566530227661133,
+            456.5873718261719,
+            27.365550994873047
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.507,
+          "bbox": [
+            468.40771484375,
+            194.2126922607422,
+            492.9594421386719,
+            219.50885009765625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.5029,
+          "bbox": [
+            465.69818115234375,
+            228.67449951171875,
+            489.84246826171875,
+            252.51466369628906
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.461,
+          "bbox": [
+            367.3631286621094,
+            193.7281951904297,
+            386.1512451171875,
+            214.43804931640625
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4073,
+          "bbox": [
+            347.9743347167969,
+            135.52774047851562,
+            377.833251953125,
+            170.50648498535156
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.4033,
+          "bbox": [
+            571.8926391601562,
+            122.2850112915039,
+            597.3310546875,
+            144.376708984375
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3772,
+          "bbox": [
+            268.3643493652344,
+            183.582763671875,
+            294.11859130859375,
+            216.1095428466797
+          ]
+        },
+        {
+          "class": "follicles",
+          "confidence": 0.3757,
+          "bbox": [
+            448.1727600097656,
+            258.1827087402344,
+            469.26629638671875,
+            279.1483459472656
+          ]
+        }
+      ]
+    }
+  ]
+}

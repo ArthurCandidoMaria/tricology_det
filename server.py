@@ -24,9 +24,14 @@ def get_npm_command() -> list[str]:
     return ["npm"]
 
 
-def start_process(command: list[str], cwd: Path, label: str) -> subprocess.Popen:
+def start_process(
+    command: list[str],
+    cwd: Path,
+    label: str,
+    env: dict[str, str] | None = None,
+) -> subprocess.Popen:
     print(f"\n[{label}] Iniciando: {' '.join(command)}")
-    return subprocess.Popen(command, cwd=str(cwd), stdin=subprocess.DEVNULL)
+    return subprocess.Popen(command, cwd=str(cwd), stdin=subprocess.DEVNULL, env=env)
 
 
 def main() -> int:
@@ -47,6 +52,10 @@ def main() -> int:
 
     python_bin = get_python_executable()
     npm_cmd = get_npm_command()
+
+    shared_env = os.environ.copy()
+    shared_env["BACKEND_PORT"] = str(args.backend_port)
+    shared_env["FRONTEND_PORT"] = str(args.frontend_port)
 
     processes: list[subprocess.Popen] = []
 
@@ -72,8 +81,8 @@ def main() -> int:
             str(args.frontend_port),
         ]
 
-        processes.append(start_process(backend_cmd, BACKEND_DIR, "BACKEND"))
-        processes.append(start_process(frontend_cmd, ROOT, "FRONTEND"))
+        processes.append(start_process(backend_cmd, BACKEND_DIR, "BACKEND", env=shared_env))
+        processes.append(start_process(frontend_cmd, ROOT, "FRONTEND", env=shared_env))
 
         print("\nAplicação rodando.")
         print(f"Frontend: http://localhost:{args.frontend_port}")

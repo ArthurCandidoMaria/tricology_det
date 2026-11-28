@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { ArrowLeft, UserPlus, Loader2, Check } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { ArrowLeft, Check, Loader2, UserPlus } from 'lucide-react';
+import { createPatient } from '@/lib/api';
 import type { Patient } from '@/lib/types';
 
 interface Props {
@@ -43,33 +43,27 @@ export function RegisterPatient({ onBack, onCreated }: Props) {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.name.trim()) {
-      setError('Nome é obrigatório.');
+      setError('O nome do paciente é obrigatório.');
       return;
     }
     setSaving(true);
     setError(null);
 
-    const { data, error: dbError } = await supabase
-      .from('patients')
-      .insert({
+    try {
+      const created = await createPatient({
         name: form.name.trim(),
         date_of_birth: form.date_of_birth || null,
         cpf: form.cpf || null,
         phone: form.phone || null,
         email: form.email || null,
-        notes: form.notes || null,
-      })
-      .select()
-      .maybeSingle();
-
-    setSaving(false);
-
-    if (dbError || !data) {
-      setError((dbError as { message?: string } | null)?.message || 'Falha ao cadastrar paciente. Tente novamente.');
-      return;
+        notes: form.notes.trim() || null,
+      });
+      onCreated(created);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Falha ao cadastrar paciente. Tente novamente.');
+    } finally {
+      setSaving(false);
     }
-
-    onCreated(data as Patient);
   }
 
   return (
@@ -85,17 +79,19 @@ export function RegisterPatient({ onBack, onCreated }: Props) {
           </div>
           <div>
             <h1 className="font-display text-2xl font-bold text-ink-900">Cadastrar novo paciente</h1>
-            <p className="text-sm text-ink-500">Informe os dados básicos do paciente para começar o acompanhamento.</p>
+            <p className="text-sm text-ink-500">Informe os dados do paciente para iniciar o prontuário tricoscópico.</p>
           </div>
         </div>
       </div>
 
       <form onSubmit={handleSubmit} className="card p-6 sm:p-8 space-y-5">
         <div>
-          <label className="label">Nome completo <span className="text-brand-500">*</span></label>
+          <label className="label">
+            Nome completo <span className="text-brand-500">*</span>
+          </label>
           <input
             className="input"
-            placeholder="Ex.: João Silva"
+            placeholder="Ex.: Maria Fernanda Costa"
             value={form.name}
             onChange={(e) => update('name', e.target.value)}
             autoFocus
@@ -146,25 +142,23 @@ export function RegisterPatient({ onBack, onCreated }: Props) {
         </div>
 
         <div>
-          <label className="label">Observações</label>
+          <label className="label">Anotações clínicas</label>
           <textarea
-            className="input min-h-[80px] resize-y"
-            placeholder="Qualquer observação médica relevante..."
+            className="input min-h-[84px] resize-y"
+            placeholder="Queixa principal, hipótese diagnóstica, medicações ou protocolo em uso..."
             value={form.notes}
             onChange={(e) => update('notes', e.target.value)}
           />
         </div>
 
         {error && (
-          <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
-            {error}
-          </div>
+          <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">{error}</div>
         )}
 
         <div className="flex items-center gap-3 pt-2">
           <button type="submit" className="btn-primary" disabled={saving}>
             {saving ? <Loader2 size={18} className="animate-spin" /> : <Check size={18} />}
-            {saving ? 'Cadastrando...' : 'Cadastrar paciente'}
+            {saving ? 'Cadastrando...' : 'Cadastrar e abrir prontuário'}
           </button>
           <button type="button" className="btn-secondary" onClick={onBack} disabled={saving}>
             Cancelar

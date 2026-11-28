@@ -1,15 +1,12 @@
 """
-Popula o banco local com um histórico de acompanhamento para demonstração das telas.
+Popula o banco local com um histórico de acompanhamento para demonstração das telas,
+incluindo contagem de bulbos, quantidade de fios detectados e espessura média em pixels.
 
 As sessões criadas aqui recebem ids com o prefixo "demo-", o que permite
-remove-las sem tocar nos dados reais:
+removê-las sem tocar nos dados reais:
 
     python seed_demo.py --reset     # remove apenas o que este script criou
     python seed_demo.py             # remove e recria
-
-As contagens são sintéticas e NÃO correspondem ao que aparece nas imagens:
-as fotos são reaproveitadas do storage existente apenas para que as telas
-tenham conteúdo visual.
 """
 
 from __future__ import annotations
@@ -19,8 +16,9 @@ import os
 import random
 import sqlite3
 import uuid
-from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+from app import init_db
 
 BASE_DIR = Path(__file__).resolve().parent
 DB_PATH = Path(os.getenv("DB_PATH", str(BASE_DIR / "hair_analysis.db")))
@@ -30,20 +28,17 @@ PHOTO_DIR = STORAGE_DIR / "session-photos" / "anonymous"
 DEMO_PREFIX = "demo-"
 PATIENT_NAME = "Teste 1"
 
-# Curva de cada região entre a primeira e a última sessão.
-# O eixo longitudinal só fica legível se houver variação em direções diferentes:
-# uma área que melhora, uma que cai e uma que serve de referência estável.
-AREA_CURVES: dict[str, tuple[int, int]] = {
-    "frontal": (11, 21),           # resposta forte ao tratamento
-    "vertex": (10, 15),            # resposta moderada
-    "crown": (17, 14),             # leve perda
-    "temporal-left": (12, 13),     # estável
-    "temporal-right": (11, 11),    # estável
-    "parietal-left": (12, 16),     # melhora leve
-    "occipital-donor": (19, 19),   # área doadora: referência, não deve variar
+# Curvas por região: (bulbos_ini, bulbos_fim, fios_ini, fios_fim, espessura_px_ini, espessura_px_fim)
+AREA_CURVES: dict[str, tuple[int, int, int, int, float, float]] = {
+    "frontal": (11, 21, 42, 74, 3.6, 4.7),           # resposta forte ao tratamento
+    "vertex": (10, 15, 38, 56, 3.5, 4.3),            # resposta moderada
+    "crown": (17, 14, 58, 49, 4.2, 3.9),             # leve perda
+    "temporal-left": (12, 13, 45, 48, 3.9, 4.0),     # estável
+    "temporal-right": (11, 11, 44, 45, 3.8, 3.9),    # estável
+    "parietal-left": (12, 16, 47, 60, 4.0, 4.4),     # melhora leve
+    "occipital-donor": (19, 19, 72, 73, 4.8, 4.8),   # área doadora: referência estável
 }
 
-# Sessões mensais anteriores às duas já existentes, mais uma recente.
 SESSION_DATES = [
     "2026-03-07",
     "2026-04-11",
@@ -54,12 +49,7 @@ SESSION_DATES = [
     "2026-09-16",
 ]
 
-# Uma sessão com enquadramento inconsistente, para exercitar o alerta de dispersão.
 WIDE_SPREAD = ("2026-06-13", "vertex")
-
-
-def utc_now() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def connect() -> sqlite3.Connection:
@@ -70,13 +60,14 @@ def connect() -> sqlite3.Connection:
 
 
 def available_photos() -> list[str]:
-    """URLs relativas das imagens já presentes no storage, reaproveitadas ciclicamente."""
     if not PHOTO_DIR.is_dir():
         return []
     files = sorted(
-        p for p in PHOTO_DIR.glob("*.png")
-        if p.stat().st_size > 1024  # ignora placeholders como verify.png
+        p for p in PHOTO_DIR.glob("*_annotated.png")
+        if p.stat().st_size > 1024
     )
+    if not files:
+        files = sorted(p for p in PHOTO_DIR.glob("*.png") if p.stat().st_size > 1024)
     return [f"/storage/session-photos/anonymous/{p.name}" for p in files]
 
 
@@ -106,22 +97,35 @@ def seed(conn: sqlite3.Connection, rng: random.Random) -> tuple[int, int]:
     for index, session_date in enumerate(SESSION_DATES):
         session_id = f"{DEMO_PREFIX}{index:02d}-{uuid.uuid4().hex[:8]}"
         created_at = f"{session_date}T12:00:00Z"
-        counts_in_session: list[int] = []
+        bulbs_in_session: list[int] = []
+        strands_in_session: list[int] = []
+        thickness_in_session: list[float] = []
+        coverage_in_session: list[float] = []
         rows: list[tuple] = []
 
-        for area, (start, end) in AREA_CURVES.items():
+        for area, (b0, b1, s0, s1, t0, t1) in AREA_CURVES.items():
             progress = index / steps if steps else 1.0
-            target = start + (end - start) * progress
+            target_b = b0 + (b1 - b0) * progress
+            target_s = s0 + (s1 - s0) * progress
+            target_t = t0 + (t1 - t0) * progress
 
             wide = (session_date, area) == WIDE_SPREAD
             shots = rng.choice([2, 3]) if not wide else 4
 
             for _ in range(shots):
-                jitter = rng.uniform(-4.5, 4.5) if wide else rng.uniform(-1.4, 1.4)
-                count = max(1, round(target + jitter))
+                jitter_b = rng.uniform(-4.5, 4.5) if wide else rng.uniform(-1.4, 1.4)
+                bulbs = max(1, round(target_b + jitter_b))
+                strands = max(5, round(target_s + rng.uniform(-4.0, 4.0)))
+                thickness = round(max(1.8, target_t + rng.uniform(-0.25, 0.25)), 2)
+                coverage = round(min(45.0, max(4.0, strands * thickness * 0.065)), 1)
+
                 url = photos[photo_cursor % len(photos)]
                 photo_cursor += 1
-                counts_in_session.append(count)
+                bulbs_in_session.append(bulbs)
+                strands_in_session.append(strands)
+                thickness_in_session.append(thickness)
+                coverage_in_session.append(coverage)
+
                 rows.append(
                     (
                         uuid.uuid4().hex,
@@ -129,30 +133,59 @@ def seed(conn: sqlite3.Connection, rng: random.Random) -> tuple[int, int]:
                         area,
                         url,
                         url,
-                        float(count),
+                        None,
+                        None,
+                        float(bulbs),
+                        int(strands),
+                        thickness,
+                        coverage,
+                        128.0,
                         created_at,
                     )
                 )
 
-        total = round(sum(counts_in_session) / len(counts_in_session))
+        avg_bulbs = round(sum(bulbs_in_session) / len(bulbs_in_session))
+        avg_strands = round(sum(strands_in_session) / len(strands_in_session), 1)
+        avg_thickness = round(sum(thickness_in_session) / len(thickness_in_session), 2)
+        avg_coverage = round(sum(coverage_in_session) / len(coverage_in_session), 1)
+
         conn.execute(
             """
-            INSERT INTO sessions (id, patient_id, session_date, total_hairs, notes, created_at)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO sessions (
+                id, patient_id, session_date, total_hairs,
+                avg_strands, avg_thickness_px, avg_coverage_pct, notes, created_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
-            (session_id, patient["id"], session_date, float(total), None, created_at),
+            (
+                session_id,
+                patient["id"],
+                session_date,
+                float(avg_bulbs),
+                avg_strands,
+                avg_thickness,
+                avg_coverage,
+                None,
+                created_at,
+            ),
         )
         conn.executemany(
             """
-            INSERT INTO session_photos
-                (id, session_id, scalp_area, photo_url, annotated_photo_url, hair_count, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO session_photos (
+                id, session_id, scalp_area, photo_url, annotated_photo_url,
+                hair_mask_url, scalp_mask_url, hair_count, strand_count,
+                avg_thickness_px, hair_coverage_pct, gray_threshold, created_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             rows,
         )
         sessions_created += 1
         photos_created += len(rows)
-        print(f"  {session_date}  media={total:>3}  areas={len(AREA_CURVES)}  fotos={len(rows)}")
+        print(
+            f"  {session_date}  bulbos={avg_bulbs:>3}  fios={avg_strands:>5}  "
+            f"espessura={avg_thickness:>4.2f}px  fotos={len(rows)}"
+        )
 
     return sessions_created, photos_created
 
@@ -163,6 +196,7 @@ def main() -> int:
     parser.add_argument("--seed", type=int, default=20260916, help="Semente do gerador, para dados reproduzíveis.")
     args = parser.parse_args()
 
+    init_db()
     if not DB_PATH.exists():
         raise SystemExit(f"Banco não encontrado em {DB_PATH}.")
 

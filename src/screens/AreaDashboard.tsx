@@ -1,10 +1,20 @@
 import { useState } from 'react';
-import { ArrowLeft, AlertTriangle, Calendar, Camera, Layers, TrendingUp, X } from 'lucide-react';
-import type { Patient, SessionPhoto } from '@/lib/types';
-import { formatDate, formatDateLong, formatNumber } from '@/lib/formatters';
+import {
+  AlertTriangle,
+  ArrowLeft,
+  Calendar,
+  Layers,
+  Ruler,
+  ScanEye,
+  Sparkles,
+  X,
+} from 'lucide-react';
+import { formatDate, formatDateLong, formatNumber, formatThickness } from '@/lib/formatters';
 import { spreadLabel, type AreaSessionPoint, type AreaSummary } from '@/lib/areaStats';
+import type { Patient, SessionPhoto } from '@/lib/types';
 import { ProgressChart, type ChartPoint } from '@/components/ProgressChart';
 import { TrendBadge } from '@/components/TrendBadge';
+import { PhotoAnalysisModal, type InspectablePhoto } from '@/components/PhotoAnalysisModal';
 
 interface Props {
   patient: Patient;
@@ -12,37 +22,81 @@ interface Props {
   onBack: () => void;
 }
 
-export function AreaDashboard({ patient, area, onBack }: Props) {
-  const [openSessionId, setOpenSessionId] = useState<string | null>(null);
-  const [selectedPhoto, setSelectedPhoto] = useState<{ photo: SessionPhoto; date: string } | null>(null);
+type AreaChartMetric = 'bulbs' | 'strands' | 'thickness';
 
-  const chartPoints: ChartPoint[] = area.points.map((p) => ({
+export function AreaDashboard({ patient, area, onBack }: Props) {
+  const [metric, setMetric] = useState<AreaChartMetric>('bulbs');
+  const [openSessionId, setOpenSessionId] = useState<string | null>(null);
+  const [inspected, setInspected] = useState<InspectablePhoto | null>(null);
+
+  const bulbPoints: ChartPoint[] = area.points.map((p) => ({
     date: p.date,
     label: p.label,
     value: p.avg,
   }));
 
+  const strandPoints: ChartPoint[] = area.points
+    .filter((p) => p.avgStrands != null)
+    .map((p) => ({ date: p.date, label: p.label, value: p.avgStrands! }));
+
+  const thicknessPoints: ChartPoint[] = area.points
+    .filter((p) => p.avgThicknessPx != null)
+    .map((p) => ({ date: p.date, label: p.label, value: p.avgThicknessPx! }));
+
+  const chartConfig =
+    metric === 'strands'
+      ? { points: strandPoints, unit: 'fios', decimals: 1, accent: 'teal' as const }
+      : metric === 'thickness'
+        ? { points: thicknessPoints, unit: 'px', decimals: 2, accent: 'sky' as const }
+        : { points: bulbPoints, unit: 'bulbos', decimals: 0, accent: 'brand' as const };
+
   const lastPoint = area.points.length > 0 ? area.points[area.points.length - 1] : null;
   const openSession = area.points.find((p) => p.sessionId === openSessionId) ?? null;
   const sessionWord = area.sessionCount === 1 ? 'sessão' : 'sessões';
 
+  function openInspector(photo: SessionPhoto, date: string) {
+    setInspected({
+      title: `${area.label} · ${formatDateLong(date)}`,
+      subtitle: patient.name,
+      originalUrl: photo.photo_url,
+      annotatedUrl: photo.annotated_photo_url || photo.photo_url,
+      hairMaskUrl: photo.hair_mask_url,
+      scalpMaskUrl: photo.scalp_mask_url,
+      bulbCount: photo.hair_count,
+      strandCount: photo.strand_count,
+      avgThicknessPx: photo.avg_thickness_px,
+      hairCoveragePct: photo.hair_coverage_pct,
+      grayThreshold: photo.gray_threshold,
+    });
+  }
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 animate-slide-up">
       <button onClick={onBack} className="btn-ghost mb-6 -ml-2">
-        <ArrowLeft size={18} /> Voltar às áreas
+        <ArrowLeft size={18} /> Voltar às regiões
       </button>
 
       <div className="card p-6 mb-6">
         <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-          <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-accent-50 to-accent-100 flex items-center justify-center flex-shrink-0">
-            <Layers size={28} className="text-accent-600" />
+          <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-brand-50 to-teal-100 flex items-center justify-center flex-shrink-0">
+            <Layers size={28} className="text-brand-600" />
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm text-ink-500">{patient.name}</p>
-            <h1 className="font-display text-2xl font-bold text-ink-900 mt-0.5">Área {area.label}</h1>
+            <h1 className="font-display text-2xl font-bold text-ink-900 mt-0.5">Região {area.label}</h1>
             <p className="text-sm text-ink-500 mt-1">
-              Evolução desta região ao longo de {area.sessionCount} {sessionWord}.
+              Evolução ao longo de {area.sessionCount} {sessionWord} · {area.photoCount}{' '}
+              {area.photoCount === 1 ? 'imagem' : 'imagens'}.
             </p>
+          </div>
+          <div className="self-start">
+            <TrendBadge
+              delta={area.delta}
+              deltaPct={area.deltaPct}
+              hasComparison={area.hasComparison}
+              size={16}
+              showAbsolute
+            />
           </div>
         </div>
       </div>
@@ -50,80 +104,82 @@ export function AreaDashboard({ patient, area, onBack }: Props) {
       {/* Indicadores desta área */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <StatCard
-          icon={<Calendar size={18} />}
+          icon={<Calendar size={16} />}
           label="Última sessão"
           value={lastPoint ? formatDate(lastPoint.date) : '—'}
           sublabel={lastPoint ? formatDateLong(lastPoint.date) : 'Sem sessões'}
         />
         <StatCard
-          icon={<Camera size={18} />}
-          label="Sessões nesta área"
-          value={String(area.sessionCount)}
-          sublabel={`${area.photoCount} ${area.photoCount === 1 ? 'imagem' : 'imagens'} no total`}
-        />
-        <StatCard
-          icon={<TrendingUp size={18} />}
-          label="Contagem mais recente"
+          icon={<ScanEye size={16} className="text-rose-500" />}
+          label="Bulbos (recente)"
           value={area.latest != null ? formatNumber(area.latest) : '—'}
           sublabel={
             lastPoint && lastPoint.countedPhotos > 1
               ? `média de ${lastPoint.countedPhotos} fotos`
-              : 'fios/folículos'
+              : 'origem/tracking de fios'
           }
         />
-        <div className="card p-5">
-          <div className="flex items-center gap-2 text-ink-400 mb-2">
-            <TrendingUp size={18} />
-            <span className="text-xs font-semibold uppercase tracking-wide">Variação na área</span>
-          </div>
-          <TrendBadge
-            delta={area.delta}
-            deltaPct={area.deltaPct}
-            hasComparison={area.hasComparison}
-            size={18}
-            showAbsolute
-          />
-          <p className="text-xs text-ink-400 mt-1">
-            {area.hasComparison ? 'da primeira à última sessão' : 'é preciso uma segunda sessão'}
-          </p>
-        </div>
+        <StatCard
+          icon={<Sparkles size={16} className="text-teal-600" />}
+          label="Fios detectados"
+          value={area.latestStrands != null ? formatNumber(area.latestStrands, 1) : '—'}
+          sublabel="segmentação grayscale"
+        />
+        <StatCard
+          icon={<Ruler size={16} className="text-sky-600" />}
+          label="Espessura média"
+          value={formatThickness(area.latestThicknessPx)}
+          sublabel="calibre médio em pixels"
+        />
       </div>
 
       {/* Evolução ao longo das sessões */}
       <div className="card p-6 mb-6">
-        <div className="mb-4">
-          <h2 className="font-display text-lg font-bold text-ink-900">Evolução da área {area.label}</h2>
-          <p className="text-sm text-ink-400">Contagem média desta região em cada sessão</p>
-        </div>
-        {area.points.length === 0 ? (
-          <p className="py-10 text-center text-sm text-ink-500">Nenhuma contagem registrada nesta área.</p>
-        ) : area.points.length === 1 ? (
-          <div className="py-10 text-center">
-            <p className="text-sm font-medium text-ink-500">
-              {formatNumber(area.points[0].avg)} fios/folículos em {formatDateLong(area.points[0].date)}
-            </p>
-            <p className="text-sm text-ink-400 mt-1">
-              Registre uma segunda sessão desta área para que a curva de evolução apareça.
-            </p>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+          <div>
+            <h2 className="font-display text-lg font-bold text-ink-900">Evolução da região {area.label}</h2>
+            <p className="text-sm text-ink-400">Alterne entre bulbos, fios detectados e espessura em pixels</p>
           </div>
-        ) : (
-          <ProgressChart points={chartPoints} />
-        )}
+
+          <div className="inline-flex rounded-xl bg-ink-100 p-1 self-start">
+            <MetricTab active={metric === 'bulbs'} onClick={() => setMetric('bulbs')} label="Bulbos" />
+            <MetricTab active={metric === 'strands'} onClick={() => setMetric('strands')} label="Fios" />
+            <MetricTab active={metric === 'thickness'} onClick={() => setMetric('thickness')} label="Espessura (px)" />
+          </div>
+        </div>
+
+        <ProgressChart
+          points={chartConfig.points}
+          unit={chartConfig.unit}
+          decimals={chartConfig.decimals}
+          accent={chartConfig.accent}
+          emptyMessage="Registre sessões nesta região para visualizar a evolução."
+        />
       </div>
 
       {/* Sessões desta área */}
       <div className="card p-6">
         <div className="mb-4">
-          <h2 className="font-display text-lg font-bold text-ink-900">Sessões desta área</h2>
-          <p className="text-sm text-ink-400">Clique numa sessão para ver as imagens da região</p>
+          <h2 className="font-display text-lg font-bold text-ink-900">Sessões desta região</h2>
+          <p className="text-sm text-ink-400">Clique numa sessão para inspecionar as imagens e máscaras</p>
         </div>
 
         {area.points.length === 0 ? (
-          <p className="py-8 text-center text-sm text-ink-500">Nenhuma contagem registrada nesta área.</p>
+          <p className="py-8 text-center text-sm text-ink-500">Nenhuma medição registrada nesta região.</p>
         ) : (
           <div className="grid gap-3">
             {[...area.points].reverse().map((point) => (
-              <SessionRow key={point.sessionId} point={point} onOpen={() => setOpenSessionId(point.sessionId)} />
+              <SessionRow
+                key={point.sessionId}
+                point={point}
+                onOpen={() => {
+                  if (point.photos.length === 1) {
+                    openInspector(point.photos[0], point.date);
+                  } else {
+                    setOpenSessionId(point.sessionId);
+                  }
+                }}
+              />
             ))}
           </div>
         )}
@@ -151,7 +207,7 @@ export function AreaDashboard({ patient, area, onBack }: Props) {
                 {area.label} · {formatDateLong(openSession.date)}
               </h2>
               <p className="text-sm text-ink-500">
-                {openSession.photos.length} {openSession.photos.length === 1 ? 'imagem' : 'imagens'} desta área nesta sessão
+                {openSession.photos.length} {openSession.photos.length === 1 ? 'imagem' : 'imagens'} — clique para abrir o visualizador de máscaras
               </p>
             </div>
             <div className="grid max-h-[75vh] grid-cols-2 gap-3 overflow-y-auto p-5 sm:grid-cols-3 lg:grid-cols-4">
@@ -159,7 +215,7 @@ export function AreaDashboard({ patient, area, onBack }: Props) {
                 <button
                   key={photo.id}
                   type="button"
-                  onClick={() => setSelectedPhoto({ photo, date: openSession.date })}
+                  onClick={() => openInspector(photo, openSession.date)}
                   className="overflow-hidden rounded-xl border border-ink-100 bg-ink-50 text-left hover:border-brand-300 transition-colors"
                 >
                   <img
@@ -167,10 +223,15 @@ export function AreaDashboard({ patient, area, onBack }: Props) {
                     alt={`${area.label} em ${formatDate(openSession.date)}`}
                     className="aspect-square w-full object-cover"
                   />
-                  <div className="px-2.5 py-2">
+                  <div className="px-2.5 py-2 space-y-0.5">
                     <p className="text-xs font-semibold text-ink-700">
-                      {photo.hair_count != null ? `${formatNumber(photo.hair_count)} fios` : 'Sem contagem'}
+                      {photo.hair_count != null ? `${formatNumber(photo.hair_count)} bulbos` : '—'}
                     </p>
+                    {photo.strand_count != null && (
+                      <p className="text-[11px] text-teal-700 font-medium">
+                        {formatNumber(photo.strand_count)} fios · {formatThickness(photo.avg_thickness_px)}
+                      </p>
+                    )}
                   </div>
                 </button>
               ))}
@@ -179,49 +240,27 @@ export function AreaDashboard({ patient, area, onBack }: Props) {
         </div>
       )}
 
-      {selectedPhoto && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 p-4"
-          onClick={() => setSelectedPhoto(null)}
-        >
-          <div
-            className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-2xl bg-white shadow-2xl"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setSelectedPhoto(null)}
-              className="absolute right-3 top-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70"
-              aria-label="Fechar imagem ampliada"
-            >
-              <X size={18} />
-            </button>
-            <img
-              src={selectedPhoto.photo.annotated_photo_url || selectedPhoto.photo.photo_url}
-              alt={`${area.label} ampliada`}
-              className="max-h-[78vh] w-full object-contain bg-ink-950"
-            />
-            <div className="border-t border-ink-100 px-5 py-3">
-              <p className="text-sm font-semibold text-ink-700">
-                {area.label} · {formatDateLong(selectedPhoto.date)}
-              </p>
-              <p className="text-sm text-ink-500 mt-1">
-                {selectedPhoto.photo.hair_count != null
-                  ? `${formatNumber(selectedPhoto.photo.hair_count)} fios/folículos`
-                  : 'Contagem não disponível'}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      {inspected && <PhotoAnalysisModal photo={inspected} onClose={() => setInspected(null)} />}
     </div>
+  );
+}
+
+function MetricTab({ active, onClick, label }: { active: boolean; onClick: () => void; label: string }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
+        active ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-500 hover:text-ink-800'
+      }`}
+    >
+      {label}
+    </button>
   );
 }
 
 function SessionRow({ point, onOpen }: { point: AreaSessionPoint; onOpen: () => void }) {
   const spread = spreadLabel(point);
-  // Dispersão alta entre fotos da mesma área e mesma sessão costuma indicar
-  // enquadramento inconsistente — vale sinalizar em vez de esconder na média.
   const wideSpread = spread != null && point.min > 0 && (point.max - point.min) / point.min > 0.3;
 
   return (
@@ -247,11 +286,25 @@ function SessionRow({ point, onOpen }: { point: AreaSessionPoint; onOpen: () => 
 
         <div className="min-w-0 flex-1">
           <p className="text-xs font-semibold uppercase tracking-wide text-ink-400">{formatDateLong(point.date)}</p>
-          <p className="font-display text-lg font-bold text-ink-900 mt-1">{formatNumber(point.avg)} fios/folículos</p>
-          <p className="text-sm text-ink-500 mt-0.5">
+          <div className="flex flex-wrap items-center gap-2 mt-1.5">
+            <span className="font-display text-base font-bold text-ink-900">
+              {formatNumber(point.avg)} bulbos
+            </span>
+            {point.avgStrands != null && (
+              <span className="rounded-lg bg-teal-50 px-2 py-0.5 text-xs font-semibold text-teal-700">
+                {formatNumber(point.avgStrands, 1)} fios
+              </span>
+            )}
+            {point.avgThicknessPx != null && (
+              <span className="rounded-lg bg-sky-50 px-2 py-0.5 text-xs font-semibold text-sky-700">
+                {formatThickness(point.avgThicknessPx)}
+              </span>
+            )}
+          </div>
+          <p className="text-xs text-ink-500 mt-1">
             {point.countedPhotos === 1
-              ? '1 foto contada'
-              : `média de ${point.countedPhotos} fotos${spread ? ` · variação ${spread}` : ''}`}
+              ? '1 imagem analisada'
+              : `média de ${point.countedPhotos} imagens${spread ? ` · variação ${spread} bulbos` : ''}`}
           </p>
           {wideSpread && (
             <p className="mt-1.5 inline-flex items-center gap-1 text-xs text-amber-600">
@@ -266,7 +319,10 @@ function SessionRow({ point, onOpen }: { point: AreaSessionPoint; onOpen: () => 
 }
 
 function StatCard({
-  icon, label, value, sublabel,
+  icon,
+  label,
+  value,
+  sublabel,
 }: {
   icon: React.ReactNode;
   label: string;
@@ -274,8 +330,8 @@ function StatCard({
   sublabel: string;
 }) {
   return (
-    <div className="card p-5">
-      <div className="flex items-center gap-2 text-ink-400 mb-2">
+    <div className="card p-4">
+      <div className="flex items-center gap-1.5 text-ink-400 mb-1.5">
         {icon}
         <span className="text-xs font-semibold uppercase tracking-wide">{label}</span>
       </div>

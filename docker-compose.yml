@@ -7,7 +7,7 @@ services:
     environment:
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost}
       YOLO_CONFIDENCE: ${YOLO_CONFIDENCE:-0.25}
-      YOLO_IMGSZ: ${YOLO_IMGSZ:-640}
+      YOLO_IMGSZ: ${YOLO_IMGSZ:-1920x1080}
       DB_PATH: /data/hair_analysis.db
       STORAGE_DIR: /data/storage
     volumes:
